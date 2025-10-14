@@ -8,13 +8,10 @@
     "scheme": "expo-supabase-starter",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.flemingvincent.expo-supabase-starter"
+      "bundleIdentifier": "com.ugoi.expo-supabase-starter"
     },
     "android": {
       "adaptiveIcon": {
@@ -22,7 +19,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.flemingvincent.exposupabasestarter"
+      "package": "com.ugoi.exposupabasestarter"
     },
     "plugins": [
       "expo-router",
@@ -33,6 +30,17 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 28
+          },
+          "ios": {
+            "deploymentTarget": "17.0"
+          }
         }
       ]
     ],

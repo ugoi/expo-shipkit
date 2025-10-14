@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository serves as a comprehensive starter project for developing React Native and Expo applications with Supabase as the backend.
+This repository serves as a comprehensive starter project for developing React Native and Expo applications with Supabase as the backend and Superwall for monetization and paywalls.
 
 #### Disclaimer
 
@@ -22,28 +22,34 @@ This is not supposed to be a template, boilerplate or a framework. It is an opin
    <p>{{ .Token }}</p>
    ```
 
-2. Clone the repository to your local machine
+2. Configure Superwall (Optional)
+   - If you haven't already, create an account on [Superwall](https://superwall.com/).
+   - Create a new project and obtain your iOS and Android API keys from the Superwall dashboard.
+   - Superwall provides paywall and monetization features for your app.
+
+3. Clone the repository to your local machine
 
 ```bash
-git clone https://github.com/FlemingVincent/expo-supabase-starter.git
+git clone https://github.com/ugoi/expo-supabase-starter.git
 ```
 
-3. Navigate to the project directory
+4. Navigate to the project directory
 
 ```bash
 cd expo-supabase-starter
 ```
 
-4. Install dependencies
+5. Install dependencies
 
 ```bash
 bun install
 ```
 
-5. Update environment variables
+6. Update environment variables
    - Update the `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_KEY` variables in the `.env` file with your Supabase URL and key respectively.
+   - If using Superwall, also update the `EXPO_PUBLIC_SUPERWALL_API_KEY_IOS` and `EXPO_PUBLIC_SUPERWALL_API_KEY_ANDROID` variables.
 
-6. Start the Expo development server
+7. Start the Expo development server
 
 ```bash
 npx expo start --clear --reset-cache
@@ -55,4 +61,4 @@ Contributions to this starter project are highly encouraged and welcome! If you 
 
 ## License
 
-This repository is licensed under the MIT License. You are granted the freedom to use, modify, and distribute the code for personal or commercial purposes. For more details, please refer to the [LICENSE](https://github.com/FlemingVincent/supabase-starter/blob/main/LICENSE) file.
+This repository is licensed under the MIT License. You are granted the freedom to use, modify, and distribute the code for personal or commercial purposes. For more details, please refer to the [LICENSE](https://github.com/ugoi/expo-supabase-starter/blob/main/LICENSE) file.
