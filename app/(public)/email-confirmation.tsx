@@ -1,25 +1,31 @@
 import { useState } from "react";
 import { Text, TextInput, Button, View, ScrollView } from "react-native";
 
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 
 export default function Page() {
-  const { signInWithOtp, isLoaded } = useSignInWithOtp();
+  const { email } = useLocalSearchParams<{ email: string }>();
 
-  const [email, setEmail] = useState("");
+  const { verifyOtp, isLoaded } = useSignInWithOtp();
+
+  const [token, setToken] = useState("");
 
   const onSignInPress = async () => {
     if (!isLoaded) return;
 
     try {
-      await signInWithOtp({
+      await verifyOtp({
         email,
+        token
       });
-      router.push({ pathname: "/email-confirmation", params: { email } });
+      router.push({pathname: "/(protected)/(tabs)", params: {
+        email: email
+      }});
     } catch (err) {
-      console.error(JSON.stringify(err, null, 2));
+        // Add email and token to error log for easier debugging
+      console.error(JSON.stringify({ email: email ? email : "", token: token ? token : "", error: err }, null, 2));
     }
   };
 
@@ -29,17 +35,17 @@ export default function Page() {
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={{ padding: 16, gap: 8 }}
     >
-      <Text>Email Address:</Text>
+      <Text>Code:</Text>
       <TextInput
         autoCapitalize="none"
-        value={email}
+        value={token}
         placeholder="Enter email"
-        onChangeText={(email) => setEmail(email)}
+        onChangeText={(token) => setToken(token)}
       />
       <Button
         title="Continue"
         onPress={onSignInPress}
-        disabled={!email}
+        disabled={!token}
       />
       <View
         style={{

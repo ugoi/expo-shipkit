@@ -22,8 +22,7 @@ export default function Page() {
     <SafeAreaView
       style={{ flex: 1, alignItems: "center", justifyContent: "flex-end" }}
     >
-      <Button title="Sign Up" onPress={() => router.push("/sign-up")} />
-      <Button title="Sign In" onPress={() => router.push("/sign-in")} />
+      <Button title="Continue with email" onPress={() => router.push("/sign-in")} />
       <Button title="Show Paywall" onPress={handleTriggerPlacement} />
       {placementState && (
         <Text>Last Paywall Result: {JSON.stringify(placementState)}</Text>
