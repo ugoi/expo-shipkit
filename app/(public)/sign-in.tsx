@@ -4,8 +4,17 @@ import { Text, TextInput, Button, View, ScrollView } from "react-native";
 import { router } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
+import { useThemeColor } from "@/hooks/useThemeColor";
+import { Fonts } from "@/constants/theme";
+import { Typography } from "@/constants/theme";
+import { IconSizes } from "@/constants/theme";
+import { Spacing } from "@/constants/theme";
 
 export default function Page() {
+  const backgroundColor = useThemeColor({}, "background");
+  const textColor = useThemeColor({}, "text");
+  const tintColor = useThemeColor({}, "tint");
+  const iconColor = useThemeColor({}, "icon");
   const { signInWithOtp, isLoaded } = useSignInWithOtp();
 
   const [email, setEmail] = useState("");
@@ -27,28 +36,23 @@ export default function Page() {
     <ScrollView
       automaticallyAdjustsScrollIndicatorInsets
       contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ padding: 16, gap: 8 }}
+      contentContainerStyle={{ padding: Spacing.md, gap: Spacing.md }}
+      style={{ backgroundColor }}
     >
-      <Text>Email Address:</Text>
+      <Text style={{ color: textColor, fontFamily: Fonts.sans, fontSize: Typography.body.fontSize }}>Email Address:</Text>
       <TextInput
         autoCapitalize="none"
         value={email}
         placeholder="Enter email"
         onChangeText={(email) => setEmail(email)}
-      />
-      <Button
-        title="Continue"
-        onPress={onSignInPress}
-        disabled={!email}
-      />
-      <View
+        keyboardType="email-address"
         style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
+          color: textColor,
+          fontFamily: Fonts.sans,
+          fontSize: Typography.body.fontSize,
         }}
-      >
-      </View>
+      />
+      <Button title="Continue" onPress={onSignInPress} disabled={!email} color={tintColor}/>
     </ScrollView>
   );
 }

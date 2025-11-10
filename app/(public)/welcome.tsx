@@ -1,10 +1,21 @@
 import { Button, Text } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { usePlacement } from "expo-superwall";
 
+import { useThemeColor } from "@/hooks/useThemeColor";
+import { Fonts } from "@/constants/theme";
+import { Typography } from "@/constants/theme";
+import { IconSizes } from "@/constants/theme";
+import { Spacing } from "@/constants/theme";
+
 export default function Page() {
+  const backgroundColor = useThemeColor({}, "background");
+  const textColor = useThemeColor({}, "text");
+  const tintColor = useThemeColor({}, "tint");
+  const iconColor = useThemeColor({}, "icon");
   const { registerPlacement, state: placementState } = usePlacement({
     onError: (err) => console.error("Placement Error:", err),
     onPresent: (info) => console.log("Paywall Presented:", info),
@@ -20,13 +31,39 @@ export default function Page() {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, alignItems: "center", justifyContent: "flex-end" }}
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "flex-end",
+        backgroundColor,
+      }}
     >
-      <Button title="Continue with email" onPress={() => router.push("/sign-in")} />
-      <Button title="Show Paywall" onPress={handleTriggerPlacement} />
-      {placementState && (
-        <Text>Last Paywall Result: {JSON.stringify(placementState)}</Text>
-      )}
+      <Text
+        style={{
+          color: textColor,
+          fontFamily: Fonts.sans,
+          fontSize: Typography.h1.fontSize,
+          marginBottom: Spacing.md,
+        }}
+      >
+        Welcome to the App!{" "}
+        <Ionicons name="rocket" size={IconSizes.lg} color={iconColor} />
+      </Text>
+      <Button
+        title="Continue with email"
+        onPress={() => router.push("/sign-in")}
+        color={tintColor}
+      />
+      <Button
+        title="Show Paywall"
+        onPress={handleTriggerPlacement}
+        color={tintColor}
+      />
+      {/* {placementState && (
+        <Text style={{ color: textColor }}>
+          Last Paywall Result: {JSON.stringify(placementState)}
+        </Text>
+      )} */}
     </SafeAreaView>
   );
 }

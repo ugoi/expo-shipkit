@@ -1,0 +1,42 @@
+.
+├── app
+│   ├── _layout.tsx
+│   ├── (protected)
+│   │   ├── _layout.tsx
+│   │   └── (tabs)
+│   │       ├── _layout.tsx
+│   │       ├── index.tsx
+│   │       └── settings.tsx
+│   └── (public)
+│       ├── _layout.tsx
+│       ├── email-confirmation.tsx
+│       ├── sign-in.tsx
+│       └── welcome.tsx
+├── app.json
+├── assets
+│   ├── adaptive-icon.png
+│   ├── icon.png
+│   └── splash-icon.png
+├── babel.config.js
+├── bun.lock
+├── constants
+│   └── theme.ts
+├── context
+│   └── supabase-context.ts
+├── eslint.config.js
+├── hooks
+│   ├── useColorScheme.ts
+│   ├── useColorScheme.web.ts
+│   ├── useSignInWithOtp.ts
+│   ├── useSupabase.ts
+│   └── useThemeColor.ts
+├── LICENSE
+├── package.json
+├── providers
+│   ├── supabase-provider.tsx
+│   └── superwall-provider.tsx
+├── readme.md
+├── tree.txt
+└── tsconfig.json
+
+10 directories, 30 files

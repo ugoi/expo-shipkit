@@ -4,9 +4,24 @@ import { Text, TextInput, Button, View, ScrollView } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
+import { useThemeColor } from "@/hooks/useThemeColor";
+
+import { Fonts } from "@/constants/theme";
+import { Typography } from "@/constants/theme";
+import { IconSizes } from "@/constants/theme";
+import { Spacing } from "@/constants/theme";
 
 export default function Page() {
+  const backgroundColor = useThemeColor({}, "background");
+  const textColor = useThemeColor({}, "text");
+  const tintColor = useThemeColor({}, "tint");
+  const iconColor = useThemeColor({}, "icon");
   const { email } = useLocalSearchParams<{ email: string }>();
+
+  if (!email) {
+    // Handle missing email - redirect back or show error
+    return <Text>Email parameter is required</Text>;
+  }
 
   const { verifyOtp, isLoaded } = useSignInWithOtp();
 
@@ -18,14 +33,14 @@ export default function Page() {
     try {
       await verifyOtp({
         email,
-        token
+        token,
       });
-      router.push({pathname: "/(protected)/(tabs)", params: {
-        email: email
-      }});
+      router.push({
+        pathname: "/(protected)/(tabs)",
+      });
     } catch (err) {
-        // Add email and token to error log for easier debugging
-      console.error(JSON.stringify({ email: email ? email : "", token: token ? token : "", error: err }, null, 2));
+      // Add email and token to error log for easier debugging
+      console.error(JSON.stringify(err, null, 2));
     }
   };
 
@@ -33,19 +48,27 @@ export default function Page() {
     <ScrollView
       automaticallyAdjustsScrollIndicatorInsets
       contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ padding: 16, gap: 8 }}
+      contentContainerStyle={{ padding: Spacing.md, gap: Spacing.md }}
+      style={{ backgroundColor }}
     >
-      <Text>Code:</Text>
+      <Text style={{ color: textColor }}>Code:</Text>
       <TextInput
         autoCapitalize="none"
         value={token}
-        placeholder="Enter email"
+        placeholder="Enter verification code"
         onChangeText={(token) => setToken(token)}
+        keyboardType="number-pad"
+        style={{
+          color: textColor,
+          fontFamily: Fonts.sans,
+          fontSize: Typography.body.fontSize,
+        }}
       />
       <Button
         title="Continue"
         onPress={onSignInPress}
         disabled={!token}
+        color={tintColor}
       />
       <View
         style={{
@@ -53,8 +76,7 @@ export default function Page() {
           flexDirection: "row",
           justifyContent: "center",
         }}
-      >
-      </View>
+      ></View>
     </ScrollView>
   );
 }
