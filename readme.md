@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository serves as a comprehensive starter project for developing React Native and Expo applications with Supabase as the backend and Superwall for monetization and paywalls.
+This repository serves as a comprehensive starter project for developing React Native and Expo applications with Supabase as the backend, Superwall for monetization, and Unistyles 3.0 powering theming.
 
 #### Disclaimer
 
@@ -14,10 +14,10 @@ This is not supposed to be a template, boilerplate or a framework. It is an opin
    - If you haven't already, create an new account on [Supabase](https://supabase.com/).
    - Create a new project and obtain your Supabase URL and API key.
 
-   Note: By default Supabase Auth requires email verification before a session is created for the users. To send users a one-time code, [modify the confirm signup template](https://supabase.com/dashboard/project/_/auth/templates) like so:
+   Note: Authentication uses magic links instead of passwords. In the Magic Link template at [Supabase Auth Templates](https://supabase.com/dashboard/project/_/auth/templates), use:
 
    ```html
-   <h2>Confirm your signup</h2>
+   <h2>One time login code</h2>
 
    <p>{{ .Token }}</p>
    ```
