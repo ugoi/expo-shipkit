@@ -5,18 +5,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useSupabase } from "@/hooks/useSupabase";
 import { useThemeColor } from "@/hooks/useThemeColor";
 
-import { Fonts } from "@/constants/theme";
-import { Typography } from "@/constants/theme";
-import { IconSizes } from "@/constants/theme";
-import { Spacing } from "@/constants/theme";
-
 export default function Page() {
   const { signOut } = useSupabase();
   const insets = useSafeAreaInsets();
   const backgroundColor = useThemeColor({}, "background");
-  const textColor = useThemeColor({}, "text");
   const tintColor = useThemeColor({}, "tint");
-  const iconColor = useThemeColor({}, "icon");
 
   const handleSignOut = async () => {
     try {

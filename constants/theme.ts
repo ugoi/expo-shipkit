@@ -152,4 +152,3 @@ export const Breakpoints = {
   xl: 1200,
   // use as many breakpoints as you need
 };
-

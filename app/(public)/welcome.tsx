@@ -1,4 +1,4 @@
-import { Button, Text } from "react-native";
+import { Alert, Button, Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { router } from "expo-router";
@@ -6,17 +6,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { usePlacement } from "expo-superwall";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { Fonts } from "@/constants/theme";
-import { Typography } from "@/constants/theme";
-import { IconSizes } from "@/constants/theme";
-import { Spacing } from "@/constants/theme";
+import { Fonts, Typography, IconSizes, Spacing } from "@/constants/theme";
 
 export default function Page() {
   const backgroundColor = useThemeColor({}, "background");
   const textColor = useThemeColor({}, "text");
   const tintColor = useThemeColor({}, "tint");
   const iconColor = useThemeColor({}, "icon");
-  const { registerPlacement, state: placementState } = usePlacement({
+  const { registerPlacement } = usePlacement({
     onError: (err) => console.error("Placement Error:", err),
     onPresent: (info) => console.log("Paywall Presented:", info),
     onDismiss: (info, result) =>
@@ -26,6 +23,13 @@ export default function Page() {
   const handleTriggerPlacement = async () => {
     await registerPlacement({
       placement: "campaign_trigger",
+      feature() {
+        console.log("Feature called");
+        Alert.alert(
+          "Feature Unlocked! 🎉",
+          "Successfully accessed fishing feature"
+        );
+      },
     });
   };
 

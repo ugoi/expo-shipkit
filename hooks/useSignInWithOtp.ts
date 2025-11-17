@@ -26,4 +26,4 @@ export const useSignInWithOtp = () => {
     signInWithOtp,
     verifyOtp,
   };
-}
+};

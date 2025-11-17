@@ -1,31 +1,25 @@
 import { useState } from "react";
-import { Text, TextInput, Button, View, ScrollView } from "react-native";
+import { Text, TextInput, Button, ScrollView } from "react-native";
 
 import { router, useLocalSearchParams } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { useThemeColor } from "@/hooks/useThemeColor";
 
-import { Fonts } from "@/constants/theme";
-import { Typography } from "@/constants/theme";
-import { IconSizes } from "@/constants/theme";
-import { Spacing } from "@/constants/theme";
+import { Fonts, Typography, Spacing } from "@/constants/theme";
 
 export default function Page() {
   const backgroundColor = useThemeColor({}, "background");
   const textColor = useThemeColor({}, "text");
   const tintColor = useThemeColor({}, "tint");
-  const iconColor = useThemeColor({}, "icon");
   const { email } = useLocalSearchParams<{ email: string }>();
+  const { verifyOtp, isLoaded } = useSignInWithOtp();
+  const [token, setToken] = useState("");
 
   if (!email) {
     // Handle missing email - redirect back or show error
     return <Text>Email parameter is required</Text>;
   }
-
-  const { verifyOtp, isLoaded } = useSignInWithOtp();
-
-  const [token, setToken] = useState("");
 
   const onSignInPress = async () => {
     if (!isLoaded) return;
@@ -70,13 +64,6 @@ export default function Page() {
         disabled={!token}
         color={tintColor}
       />
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-      ></View>
     </ScrollView>
   );
 }

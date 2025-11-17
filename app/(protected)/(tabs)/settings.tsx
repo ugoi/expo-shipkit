@@ -2,11 +2,10 @@ import { Button, Text, View } from "react-native";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { useSupabase } from "@/hooks/useSupabase";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { useSupabase } from "@/hooks/useSupabase";
 
-import { Fonts } from "@/constants/theme";
-import { Typography } from "@/constants/theme";
+import { Fonts, Typography } from "@/constants/theme";
 
 import { Host, Switch } from "@expo/ui/swift-ui";
 import { useMMKVBoolean } from "react-native-mmkv";
@@ -17,12 +16,20 @@ export default function Page() {
   const backgroundColor = useThemeColor({}, "background");
   const textColor = useThemeColor({}, "text");
   const tintColor = useThemeColor({}, "tint");
-  const iconColor = useThemeColor({}, "icon");
-  const [isDarkModeEnabled, setIsDarkModeEnabled] = useMMKVBoolean('darkModeEnabled');
+  const [isDarkModeEnabled, setIsDarkModeEnabled] =
+    useMMKVBoolean("darkModeEnabled");
 
   const handleDarkModeToggle = (checked: boolean) => {
     try {
       setIsDarkModeEnabled(checked);
+    } catch (err) {
+      console.error(JSON.stringify(err, null, 2));
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
     }
@@ -76,11 +83,12 @@ export default function Page() {
           onValueChange={(checked) => {
             handleDarkModeToggle(checked);
           }}
-          color="#ff0000"
+          color={tintColor}
           label="Play music"
           variant="switch"
         />
       </Host>
+      <Button title="Sign Out" color={tintColor} onPress={handleSignOut} />
     </View>
   );
 }
