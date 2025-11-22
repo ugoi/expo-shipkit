@@ -42,3 +42,6 @@ ios/
 
 # android
 android/
+
+# google play console service account keys
+expo-supabase-starter-*-*.json

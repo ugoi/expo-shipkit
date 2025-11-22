@@ -5,6 +5,7 @@ import { Platform } from "react-native";
 
 export default function PublicLayout() {
   const tintColor = useThemeColor({}, "tint");
+  const backgroundColor = useThemeColor({}, "background");
   return (
     <Stack initialRouteName="welcome">
       <Stack.Screen
@@ -12,6 +13,8 @@ export default function PublicLayout() {
         options={{
           title: "Welcome",
           headerTransparent: Platform.OS === "ios",
+          headerTintColor: tintColor,
+          headerStyle: { backgroundColor: backgroundColor },
         }}
       />
       <Stack.Screen
@@ -23,6 +26,7 @@ export default function PublicLayout() {
           headerShadowVisible: false,
           headerBackButtonDisplayMode: "minimal",
           headerTintColor: tintColor,
+          headerStyle: { backgroundColor: backgroundColor },
         }}
       />
       <Stack.Screen
@@ -34,6 +38,7 @@ export default function PublicLayout() {
           headerShadowVisible: false,
           headerBackButtonDisplayMode: "minimal",
           headerTintColor: tintColor,
+          headerStyle: { backgroundColor: backgroundColor },
         }}
       />
     </Stack>

@@ -5,11 +5,11 @@ export default function TabsLayout() {
     <NativeTabs>
       <NativeTabs.Trigger name="index">
         <Label>Home</Label>
-        <Icon sf="house.fill" drawable="custom_android_drawable" />
+        <Icon sf="house.fill" drawable="home" />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="settings">
         <Label>Settings</Label>
-        <Icon sf="gearshape.fill" />
+        <Icon sf="gearshape.fill" drawable="settings" />
       </NativeTabs.Trigger>
     </NativeTabs>
   );

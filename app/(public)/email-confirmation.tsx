@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { Text, TextInput, Button, ScrollView } from "react-native";
+import { Text, TextInput } from "react-native";
 
-import { router, useLocalSearchParams } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { useThemeColor } from "@/hooks/useThemeColor";
 
-import { Fonts, Typography, Spacing } from "@/constants/theme";
+import { Fonts, Typography } from "@/constants/theme";
+import { Button } from "@/components/ui/button";
+import { ThemedScrollView } from "@/components/themed-scroll-view";
 
 export default function Page() {
-  const backgroundColor = useThemeColor({}, "background");
+  const router = useRouter();
   const textColor = useThemeColor({}, "text");
   const tintColor = useThemeColor({}, "tint");
   const { email } = useLocalSearchParams<{ email: string }>();
@@ -29,7 +31,7 @@ export default function Page() {
         email,
         token,
       });
-      router.push({
+      router.navigate({
         pathname: "/(protected)/(tabs)",
       });
     } catch (err) {
@@ -39,12 +41,7 @@ export default function Page() {
   };
 
   return (
-    <ScrollView
-      automaticallyAdjustsScrollIndicatorInsets
-      contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ padding: Spacing.md, gap: Spacing.md }}
-      style={{ backgroundColor }}
-    >
+    <ThemedScrollView>
       <Text style={{ color: textColor }}>Code:</Text>
       <TextInput
         autoCapitalize="none"
@@ -64,6 +61,6 @@ export default function Page() {
         disabled={!token}
         color={tintColor}
       />
-    </ScrollView>
+    </ThemedScrollView>
   );
 }

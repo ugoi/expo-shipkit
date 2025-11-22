@@ -1,17 +1,17 @@
-import { Alert, Button, Text } from "react-native";
+import { Alert, Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import { router } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 import { usePlacement } from "expo-superwall";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Fonts, Typography, IconSizes, Spacing } from "@/constants/theme";
+import { Button } from "@/components/ui/button";
+import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 
 export default function Page() {
-  const backgroundColor = useThemeColor({}, "background");
+  const router = useRouter();
   const textColor = useThemeColor({}, "text");
-  const tintColor = useThemeColor({}, "tint");
   const iconColor = useThemeColor({}, "icon");
   const { registerPlacement } = usePlacement({
     onError: (err) => console.error("Placement Error:", err),
@@ -34,14 +34,7 @@ export default function Page() {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "flex-end",
-        backgroundColor,
-      }}
-    >
+    <ThemedSafeAreaView>
       <Text
         style={{
           color: textColor,
@@ -55,19 +48,10 @@ export default function Page() {
       </Text>
       <Button
         title="Continue with email"
-        onPress={() => router.push("/sign-in")}
-        color={tintColor}
+        onPress={() => router.navigate("/sign-in")}
       />
-      <Button
-        title="Show Paywall"
-        onPress={handleTriggerPlacement}
-        color={tintColor}
-      />
-      {/* {placementState && (
-        <Text style={{ color: textColor }}>
-          Last Paywall Result: {JSON.stringify(placementState)}
-        </Text>
-      )} */}
-    </SafeAreaView>
+
+      <Button title="Show Paywall" onPress={handleTriggerPlacement} />
+    </ThemedSafeAreaView>
   );
 }

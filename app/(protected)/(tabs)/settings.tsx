@@ -1,23 +1,26 @@
-import { Button, Text, View } from "react-native";
-
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Platform, Text } from "react-native";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useSupabase } from "@/hooks/useSupabase";
 
 import { Fonts, Typography } from "@/constants/theme";
 
-import { Host, Switch } from "@expo/ui/swift-ui";
+import { Switch as ComposeSwitch } from "@expo/ui/jetpack-compose";
+import { Host as SwiftHost, Switch as SwiftSwitch } from "@expo/ui/swift-ui";
 import { useMMKVBoolean } from "react-native-mmkv";
+import { Button } from "@/components/ui/button";
+import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 
 export default function Page() {
   const { signOut } = useSupabase();
-  const insets = useSafeAreaInsets();
-  const backgroundColor = useThemeColor({}, "background");
   const textColor = useThemeColor({}, "text");
   const tintColor = useThemeColor({}, "tint");
+  const switchOnColor = useThemeColor({}, "switchOn");
+  const switchOffColor = useThemeColor({}, "switchOff");
+
   const [isDarkModeEnabled, setIsDarkModeEnabled] =
     useMMKVBoolean("darkModeEnabled");
+  const darkModeEnabled = Boolean(isDarkModeEnabled);
 
   const handleDarkModeToggle = (checked: boolean) => {
     try {
@@ -34,16 +37,38 @@ export default function Page() {
       console.error(JSON.stringify(err, null, 2));
     }
   };
+  const renderDarkModeToggle = () => {
+    // log tintColor to verify it's being applied correctly
+    console.log("Rendering switch with tintColor:", tintColor);
+    if (Platform.OS === "ios") {
+      return (
+        <SwiftHost matchContents>
+          <SwiftSwitch
+            value={darkModeEnabled}
+            onValueChange={handleDarkModeToggle}
+            color={darkModeEnabled ? switchOnColor : switchOffColor}
+            label="Enable dark mode"
+            variant="switch"
+          />
+        </SwiftHost>
+      );
+    }
+
+    return (
+      <ComposeSwitch
+        value={darkModeEnabled}
+        onValueChange={handleDarkModeToggle}
+        color={darkModeEnabled ? switchOnColor : switchOffColor}
+        label="Enable dark mode"
+        variant="switch"
+      />
+    );
+  };
 
   return (
-    <View
+    <ThemedSafeAreaView
       style={{
-        flex: 1,
         justifyContent: "center",
-        alignItems: "center",
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom,
-        backgroundColor,
       }}
     >
       <Text
@@ -55,7 +80,7 @@ export default function Page() {
       >
         Enable Dark Mode
       </Text>
-      {isDarkModeEnabled ? (
+      {darkModeEnabled ? (
         <Text
           style={{
             color: textColor,
@@ -76,19 +101,9 @@ export default function Page() {
           Dark mode is disabled
         </Text>
       )}
-      {/* Switch between system, light and dark mode */}
-      <Host matchContents>
-        <Switch
-          value={isDarkModeEnabled ? true : false}
-          onValueChange={(checked) => {
-            handleDarkModeToggle(checked);
-          }}
-          color={tintColor}
-          label="Play music"
-          variant="switch"
-        />
-      </Host>
+      {/* Use native UI switches per-platform to avoid HostView errors. */}
+      {renderDarkModeToggle()}
       <Button title="Sign Out" color={tintColor} onPress={handleSignOut} />
-    </View>
+    </ThemedSafeAreaView>
   );
 }

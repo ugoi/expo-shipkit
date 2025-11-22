@@ -1,15 +1,19 @@
 import { useState } from "react";
-import { Text, TextInput, Button, ScrollView } from "react-native";
+import { TextInput } from "react-native";
 
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Fonts, Typography, Spacing } from "@/constants/theme";
+import { Button } from "@/components/ui/button";
+import { ThemedScrollView } from "@/components/themed-scroll-view";
 
 export default function Page() {
+  const router = useRouter();
   const backgroundColor = useThemeColor({}, "background");
   const textColor = useThemeColor({}, "text");
+  const placeHolderTextColor = useThemeColor({}, "placeHolderText");
   const tintColor = useThemeColor({}, "tint");
   const { signInWithOtp, isLoaded } = useSignInWithOtp();
 
@@ -17,51 +21,54 @@ export default function Page() {
 
   const onSignInPress = async () => {
     if (!isLoaded) return;
+    const normalizedEmail = email.trim().toLowerCase();
 
-    try {
-      await signInWithOtp({
-        email,
-      });
-      router.push({ pathname: "/email-confirmation", params: { email } });
-    } catch (err) {
-      console.error(JSON.stringify(err, null, 2));
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      alert("Enter a valid email address.");
+      return;
     }
+
+    await signInWithOtp({
+      email: normalizedEmail,
+    });
+    router.navigate({
+      pathname: "/email-confirmation",
+      params: { email: normalizedEmail },
+    });
   };
 
   return (
-    <ScrollView
+    <ThemedScrollView
       automaticallyAdjustsScrollIndicatorInsets
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={{ padding: Spacing.md, gap: Spacing.md }}
       style={{ backgroundColor }}
+      keyboardShouldPersistTaps="handled"
     >
-      <Text
-        style={{
-          color: textColor,
-          fontFamily: Fonts.sans,
-          fontSize: Typography.body.fontSize,
-        }}
-      >
-        Email Address:
-      </Text>
       <TextInput
         autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="email-address"
+        onChangeText={setEmail}
         value={email}
         placeholder="Enter email"
-        onChangeText={(email) => setEmail(email)}
-        keyboardType="email-address"
+        placeholderTextColor={placeHolderTextColor}
         style={{
           color: textColor,
           fontFamily: Fonts.sans,
           fontSize: Typography.body.fontSize,
+          borderColor: tintColor,
+          borderWidth: 1,
+          borderRadius: 8,
+          padding: Spacing.md,
         }}
       />
       <Button
         title="Continue"
         onPress={onSignInPress}
-        disabled={!email}
         color={tintColor}
+        disabled={!email}
       />
-    </ScrollView>
+    </ThemedScrollView>
   );
 }

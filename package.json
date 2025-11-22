@@ -7,7 +7,9 @@
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "lint": "expo lint . --fix"
+    "lint": "expo lint . --fix",
+    "prettier": "prettier --write .",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@expo/ui": "~0.2.0-beta.7",

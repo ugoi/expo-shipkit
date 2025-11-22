@@ -8,7 +8,7 @@ import { useMMKVBoolean } from "react-native-mmkv";
 
 export function useThemeColor(
   props: { light?: string; dark?: string },
-  colorName: keyof typeof Colors.light & keyof typeof Colors.dark
+  colorName: keyof typeof Colors.light & keyof typeof Colors.dark,
 ) {
   const [isDarkModeEnabled] = useMMKVBoolean("darkModeEnabled");
   const theme = isDarkModeEnabled ? "dark" : "light";
