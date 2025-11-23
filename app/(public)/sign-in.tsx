@@ -19,6 +19,7 @@ export default function Page() {
   const { signInWithOtp, isLoaded } = useSignInWithOtp();
 
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSignInPress = async () => {
     if (!isLoaded) return;
@@ -28,6 +29,8 @@ export default function Page() {
       alert("Enter a valid email address.");
       return;
     }
+
+    setIsLoading(true);
     try {
       await signInWithOtp({
         email: normalizedEmail,
@@ -43,7 +46,7 @@ export default function Page() {
         alert("An unexpected error occurred. Please try again.");
       }
     } finally {
-      // setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -74,10 +77,10 @@ export default function Page() {
         }}
       />
       <Button
-        title="Continue"
+        title={isLoading ? "Sending..." : "Continue"}
         onPress={onSignInPress}
         color={tintColor}
-        disabled={!email}
+        disabled={!email || isLoading}
       />
     </ThemedScrollView>
   );

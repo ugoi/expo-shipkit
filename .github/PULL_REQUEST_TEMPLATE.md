@@ -38,7 +38,7 @@ Attach screenshots or videos demonstrating the changes, especially for UI-relate
 
 ### Checklist
 
-- [ ] I have read the [contributing guidelines](link-to-contributing-guidelines)
+- [ ] I have read the [contributing guidelines](../CONTRIBUTING.md)
 - [ ] My code follows the project's coding standards
 - [ ] I have added/updated tests for my changes
 - [ ] All tests pass locally

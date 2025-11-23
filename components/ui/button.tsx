@@ -1,4 +1,3 @@
-import { PropsWithChildren } from "react";
 import { Pressable, Text } from "react-native";
 import { Fonts, Spacing, Typography } from "@/constants/theme";
 import { useThemeColor } from "@/hooks/useThemeColor";
@@ -9,7 +8,7 @@ export function Button({
   color,
   disabled,
   style,
-}: PropsWithChildren & {
+}: {
   title: string;
   onPress: () => void;
   color?: string;
@@ -23,6 +22,8 @@ export function Button({
 
   return (
     <Pressable
+      disabled={disabled}
+      accessibilityState={{ disabled }}
       style={[
         {
           backgroundColor: disabled

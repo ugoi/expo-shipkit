@@ -1,4 +1,4 @@
-import { Platform, Text } from "react-native";
+import { Alert, Platform, Text } from "react-native";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useSupabase } from "@/hooks/useSupabase";
@@ -28,13 +28,14 @@ export default function Page() {
   const [isPaidUser, setIsPaidUser] = useState(false);
   useEffect(() => {
     if (subscriptionStatus?.status === "ACTIVE") {
-      console.log(
-        "User has active entitlements:",
-        subscriptionStatus.entitlements,
-      );
+      if (__DEV__) {
+        console.log("User has active entitlements");
+      }
       setIsPaidUser(true);
     } else {
-      console.log("User is on free plan");
+      if (__DEV__) {
+        console.log("User is on free plan");
+      }
       setIsPaidUser(false);
     }
   }, [subscriptionStatus]);
@@ -43,7 +44,12 @@ export default function Page() {
     try {
       setIsDarkModeEnabled(checked);
     } catch (err) {
-      console.error(JSON.stringify(err, null, 2));
+      console.error("Dark mode toggle error:", err);
+      // Consider showing a toast/alert to the user
+      Alert.alert(
+        "Dark Mode Toggle Failed",
+        "An error occurred while toggling dark mode. Please try again.",
+      );
     }
   };
 
@@ -51,7 +57,12 @@ export default function Page() {
     try {
       await signOut();
     } catch (err) {
-      console.error(JSON.stringify(err, null, 2));
+      console.error("Sign out error:", err);
+      // Consider showing a toast/alert to the user
+      Alert.alert(
+        "Sign Out Failed",
+        "An error occurred while signing out. Please try again.",
+      );
     }
   };
   const renderDarkModeToggle = () => {

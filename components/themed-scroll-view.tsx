@@ -11,16 +11,23 @@ export function ThemedScrollView({
   style,
   lightColor,
   darkColor,
+  contentContainerStyle,
   ...otherProps
 }: ThemedScrollViewProps) {
-  const backgroundColor = useThemeColor({}, "background");
+  const backgroundColor = useThemeColor(
+    { light: lightColor, dark: darkColor },
+    "background",
+  );
 
   return (
     <ScrollView
       style={[{ backgroundColor }, style]}
       automaticallyAdjustsScrollIndicatorInsets
       contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ padding: Spacing.md, gap: Spacing.md }}
+      contentContainerStyle={[
+        { padding: Spacing.md, gap: Spacing.md },
+        contentContainerStyle,
+      ]}
       keyboardShouldPersistTaps="handled"
       {...otherProps}
     />

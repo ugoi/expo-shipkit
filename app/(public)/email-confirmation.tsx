@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, TextInput } from "react-native";
+import { Text, TextInput, Alert } from "react-native";
 
 import { useRouter, useLocalSearchParams } from "expo-router";
 
@@ -14,7 +14,8 @@ export default function Page() {
   const router = useRouter();
   const textColor = useThemeColor({}, "text");
   const tintColor = useThemeColor({}, "tint");
-  const { email } = useLocalSearchParams<{ email: string }>();
+  const params = useLocalSearchParams<{ email?: string | string[] }>();
+  const email = typeof params.email === "string" ? params.email : undefined;
   const { verifyOtp, isLoaded } = useSignInWithOtp();
   const [token, setToken] = useState("");
 
@@ -35,8 +36,11 @@ export default function Page() {
         pathname: "/(protected)/(tabs)",
       });
     } catch (err) {
-      // Add email and token to error log for easier debugging
       console.error(JSON.stringify(err, null, 2));
+      Alert.alert(
+        "Verification Failed",
+        "Verification failed — please check your code and try again",
+      );
     }
   };
 

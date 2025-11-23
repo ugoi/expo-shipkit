@@ -32,21 +32,21 @@ const patchSuperwallDeepLinkHandler = () => {
 
   const callSafely = async (url: string) => {
     if (!url) {
-      return false;
+      return;
     }
 
     try {
-      return await handler.call(moduleRef, url);
+      await handler.call(moduleRef, url);
     } catch (error) {
       if (shouldIgnoreError(error)) {
-        console.debug("[superwall] Ignored non-Superwall deep link", url);
-        return false;
+        console.log("[superwall] Ignored non-Superwall deep link", url);
+        return;
       }
       throw error;
     }
   };
 
-  moduleRef.handleDeepLink = (url: string) => callSafely(url);
+  moduleRef.handleDeepLink = ((url: string) => callSafely(url)) as any;
 
   moduleRef.__patchedIgnoreNonSuperwallLinks = true;
 };
@@ -58,9 +58,18 @@ interface SuperwallProviderProps {
 }
 
 export const SuperwallProvider = ({ children }: SuperwallProviderProps) => {
-  const superwallApiKeyIos = process.env.EXPO_PUBLIC_SUPERWALL_API_KEY_IOS!;
+  const superwallApiKeyIos = process.env.EXPO_PUBLIC_SUPERWALL_API_KEY_IOS;
   const superwallApiKeyAndroid =
-    process.env.EXPO_PUBLIC_SUPERWALL_API_KEY_ANDROID!;
+    process.env.EXPO_PUBLIC_SUPERWALL_API_KEY_ANDROID;
+
+  if (!superwallApiKeyIos || !superwallApiKeyAndroid) {
+    const missingKeys = [];
+    if (!superwallApiKeyIos)
+      missingKeys.push("EXPO_PUBLIC_SUPERWALL_API_KEY_IOS");
+    if (!superwallApiKeyAndroid)
+      missingKeys.push("EXPO_PUBLIC_SUPERWALL_API_KEY_ANDROID");
+    throw new Error(`Missing Superwall API keys: ${missingKeys.join(", ")}`);
+  }
 
   return (
     <RealSuperwallProvider
