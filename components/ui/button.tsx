@@ -8,11 +8,13 @@ export function Button({
   onPress,
   color,
   disabled,
+  style,
 }: PropsWithChildren & {
   title: string;
   onPress: () => void;
   color?: string;
   disabled?: boolean;
+  style?: object;
 }) {
   const backgroundColor = useThemeColor({}, "background");
   const tintColor = useThemeColor({}, "tint");
@@ -21,16 +23,19 @@ export function Button({
 
   return (
     <Pressable
-      style={{
-        backgroundColor: disabled
-          ? disabledBackgroundColor
-          : (color ?? tintColor),
-        paddingVertical: Spacing.sm,
-        paddingHorizontal: Spacing.lg,
-        borderRadius: 8,
-        marginBottom: Spacing.xl,
-        alignItems: "center",
-      }}
+      style={[
+        {
+          backgroundColor: disabled
+            ? disabledBackgroundColor
+            : (color ?? tintColor),
+          paddingVertical: Spacing.sm,
+          paddingHorizontal: Spacing.lg,
+          borderRadius: 8,
+          marginBottom: Spacing.xl,
+          alignItems: "center",
+        },
+        style,
+      ]}
       onPress={onPress}
     >
       <Text

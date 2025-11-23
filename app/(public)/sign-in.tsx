@@ -8,6 +8,7 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import { Fonts, Typography, Spacing } from "@/constants/theme";
 import { Button } from "@/components/ui/button";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
+import { AuthError } from "@supabase/supabase-js";
 
 export default function Page() {
   const router = useRouter();
@@ -27,14 +28,23 @@ export default function Page() {
       alert("Enter a valid email address.");
       return;
     }
-
-    await signInWithOtp({
-      email: normalizedEmail,
-    });
-    router.navigate({
-      pathname: "/email-confirmation",
-      params: { email: normalizedEmail },
-    });
+    try {
+      await signInWithOtp({
+        email: normalizedEmail,
+      });
+      router.navigate({
+        pathname: "/email-confirmation",
+        params: { email: normalizedEmail },
+      });
+    } catch (error) {
+      if (error instanceof AuthError) {
+        alert("Error sending OTP: " + error.message);
+      } else {
+        alert("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      // setLoading(false);
+    }
   };
 
   return (

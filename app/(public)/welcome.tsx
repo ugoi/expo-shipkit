@@ -23,13 +23,6 @@ export default function Page() {
   const handleTriggerPlacement = async () => {
     await registerPlacement({
       placement: "campaign_trigger",
-      feature() {
-        console.log("Feature called");
-        Alert.alert(
-          "Feature Unlocked! 🎉",
-          "Successfully accessed fishing feature"
-        );
-      },
     });
   };
 

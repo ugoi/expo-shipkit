@@ -3,13 +3,15 @@ import { Platform, Text } from "react-native";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useSupabase } from "@/hooks/useSupabase";
 
-import { Fonts, Typography } from "@/constants/theme";
+import { Fonts, Spacing, Typography } from "@/constants/theme";
 
 import { Switch as ComposeSwitch } from "@expo/ui/jetpack-compose";
 import { Host as SwiftHost, Switch as SwiftSwitch } from "@expo/ui/swift-ui";
 import { useMMKVBoolean } from "react-native-mmkv";
 import { Button } from "@/components/ui/button";
 import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
+import { useUser } from "expo-superwall";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const { signOut } = useSupabase();
@@ -21,6 +23,21 @@ export default function Page() {
   const [isDarkModeEnabled, setIsDarkModeEnabled] =
     useMMKVBoolean("darkModeEnabled");
   const darkModeEnabled = Boolean(isDarkModeEnabled);
+
+  const { subscriptionStatus } = useUser();
+  const [isPaidUser, setIsPaidUser] = useState(false);
+  useEffect(() => {
+    if (subscriptionStatus?.status === "ACTIVE") {
+      console.log(
+        "User has active entitlements:",
+        subscriptionStatus.entitlements,
+      );
+      setIsPaidUser(true);
+    } else {
+      console.log("User is on free plan");
+      setIsPaidUser(false);
+    }
+  }, [subscriptionStatus]);
 
   const handleDarkModeToggle = (checked: boolean) => {
     try {
@@ -38,11 +55,9 @@ export default function Page() {
     }
   };
   const renderDarkModeToggle = () => {
-    // log tintColor to verify it's being applied correctly
-    console.log("Rendering switch with tintColor:", tintColor);
     if (Platform.OS === "ios") {
       return (
-        <SwiftHost matchContents>
+        <SwiftHost matchContents style={{ marginBottom: Spacing.md }}>
           <SwiftSwitch
             value={darkModeEnabled}
             onValueChange={handleDarkModeToggle}
@@ -56,6 +71,7 @@ export default function Page() {
 
     return (
       <ComposeSwitch
+        style={{ marginBottom: Spacing.md }}
         value={darkModeEnabled}
         onValueChange={handleDarkModeToggle}
         color={darkModeEnabled ? switchOnColor : switchOffColor}
@@ -76,6 +92,7 @@ export default function Page() {
           color: textColor,
           fontFamily: Fonts.sans,
           fontSize: Typography.body.fontSize,
+          marginBottom: Spacing.sm,
         }}
       >
         Enable Dark Mode
@@ -86,6 +103,7 @@ export default function Page() {
             color: textColor,
             fontFamily: Fonts.sans,
             fontSize: Typography.body.fontSize,
+            marginBottom: Spacing.md,
           }}
         >
           Dark mode is enabled
@@ -96,6 +114,7 @@ export default function Page() {
             color: textColor,
             fontFamily: Fonts.sans,
             fontSize: Typography.body.fontSize,
+            marginBottom: Spacing.md,
           }}
         >
           Dark mode is disabled
@@ -103,7 +122,33 @@ export default function Page() {
       )}
       {/* Use native UI switches per-platform to avoid HostView errors. */}
       {renderDarkModeToggle()}
-      <Button title="Sign Out" color={tintColor} onPress={handleSignOut} />
+      <Button
+        style={{ marginBottom: Spacing.md }}
+        title="Sign Out"
+        color={tintColor}
+        onPress={handleSignOut}
+      />
+      {isPaidUser ? (
+        <Text
+          style={{
+            color: textColor,
+            fontFamily: Fonts.sans,
+            fontSize: Typography.body.fontSize,
+          }}
+        >
+          You are a paid user
+        </Text>
+      ) : (
+        <Text
+          style={{
+            color: textColor,
+            fontFamily: Fonts.sans,
+            fontSize: Typography.body.fontSize,
+          }}
+        >
+          You are on the free plan
+        </Text>
+      )}
     </ThemedSafeAreaView>
   );
 }

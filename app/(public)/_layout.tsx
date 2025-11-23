@@ -14,7 +14,10 @@ export default function PublicLayout() {
           title: "Welcome",
           headerTransparent: Platform.OS === "ios",
           headerTintColor: tintColor,
-          headerStyle: { backgroundColor: backgroundColor },
+          headerStyle:
+            Platform.OS === "ios"
+              ? undefined
+              : { backgroundColor: backgroundColor },
         }}
       />
       <Stack.Screen
@@ -26,7 +29,10 @@ export default function PublicLayout() {
           headerShadowVisible: false,
           headerBackButtonDisplayMode: "minimal",
           headerTintColor: tintColor,
-          headerStyle: { backgroundColor: backgroundColor },
+          headerStyle:
+            Platform.OS === "ios"
+              ? undefined
+              : { backgroundColor: backgroundColor },
         }}
       />
       <Stack.Screen
@@ -38,7 +44,10 @@ export default function PublicLayout() {
           headerShadowVisible: false,
           headerBackButtonDisplayMode: "minimal",
           headerTintColor: tintColor,
-          headerStyle: { backgroundColor: backgroundColor },
+          headerStyle:
+            Platform.OS === "ios"
+              ? undefined
+              : { backgroundColor: backgroundColor },
         }}
       />
     </Stack>
