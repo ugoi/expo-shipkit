@@ -23,6 +23,9 @@ export default function Page() {
   const handleTriggerPlacement = async () => {
     await registerPlacement({
       placement: "campaign_trigger",
+      feature: () => {
+        router.navigate("/sign-in");
+      },
     });
   };
 

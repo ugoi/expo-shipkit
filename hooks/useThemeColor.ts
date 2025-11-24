@@ -4,6 +4,7 @@
  */
 
 import { Colors } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/useColorScheme";
 import { useMMKVBoolean } from "react-native-mmkv";
 
 export function useThemeColor(
@@ -11,7 +12,12 @@ export function useThemeColor(
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark,
 ) {
   const [isDarkModeEnabled] = useMMKVBoolean("darkModeEnabled");
-  const theme = isDarkModeEnabled ? "dark" : "light";
+  const systemScheme = useColorScheme();
+  const prefersDark =
+    typeof isDarkModeEnabled === "boolean"
+      ? isDarkModeEnabled
+      : systemScheme === "dark";
+  const theme = prefersDark ? "dark" : "light";
   // const theme = useColorScheme();
   const colorFromProps = props[theme];
 
