@@ -12,7 +12,7 @@ Thank you for your interest in contributing to the Expo Supabase Starter! We wel
     ```
 3.  **Install dependencies**:
     ```bash
-    npm install
+    bun install
     ```
 4.  **Set up environment variables**:
     Copy `.env.example` to `.env` and fill in your Supabase and other API keys.
@@ -28,11 +28,11 @@ Thank you for your interest in contributing to the Expo Supabase Starter! We wel
     ```
 2.  **Run the project**:
     ```bash
-    npm start
+    bun start
     # or
-    npm run ios
+    bun run ios
     # or
-    npm run android
+    bun run android
     ```
 3.  **Make your changes**.
 
@@ -43,14 +43,14 @@ Before submitting a Pull Request, please ensure your code meets our quality stan
 Run the following command to lint, format, and type-check your code:
 
 ```bash
-npm run all
+ bun run all
 ```
 
 This runs:
 
-- `npm run lint`
-- `npm run format`
-- `npm run type-check`
+- `bun run lint`
+- `bun run format`
+- `bun run type-check`
 
 ## Submitting a Pull Request
 
