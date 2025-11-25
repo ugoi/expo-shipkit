@@ -23,6 +23,8 @@ export const Colors = {
     white: "#ffffff",
     switchOn: "#0a7ea4",
     switchOff: "#cccccc",
+    tabBadgeText: "#ffffff",
+    indicatorColor: "#dcf6ffff",
   },
   dark: {
     text: "#ECEDEE",
@@ -33,11 +35,13 @@ export const Colors = {
     tint: tintColorDark,
     icon: "#9BA1A6",
     tabIconDefault: "#9BA1A6",
-    tabIconSelected: tintColorDark,
+    tabIconSelected: tintColorLight,
     black: "#000000",
     white: "#ffffff",
     switchOn: "#0a7ea4",
     switchOff: "#555555",
+    tabBadgeText: "#000000",
+    indicatorColor: "#3e3e3eff",
   },
 };
 

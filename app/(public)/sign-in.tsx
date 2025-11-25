@@ -66,6 +66,7 @@ export default function Page() {
         value={email}
         placeholder="Enter email"
         placeholderTextColor={placeHolderTextColor}
+        underlineColorAndroid="transparent"
         style={{
           color: textColor,
           fontFamily: Fonts.sans,
@@ -74,6 +75,7 @@ export default function Page() {
           borderWidth: 1,
           borderRadius: 8,
           padding: Spacing.md,
+          backgroundColor: "transparent",
         }}
       />
       <Button
