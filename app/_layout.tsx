@@ -1,11 +1,18 @@
 import { useEffect } from "react";
 
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
 
 import { useSupabase } from "@/hooks/useSupabase";
 import { SupabaseProvider } from "@/providers/supabase-provider";
 import { SuperwallProvider } from "@/providers/superwall-provider";
+import { useColorScheme } from "@/hooks/useColorScheme";
 
 SplashScreen.setOptions({
   duration: 500,
@@ -15,12 +22,16 @@ SplashScreen.setOptions({
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const colorScheme = useColorScheme();
   return (
-    <SuperwallProvider>
-      <SupabaseProvider>
-        <RootNavigator />
-      </SupabaseProvider>
-    </SuperwallProvider>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <SuperwallProvider>
+        <SupabaseProvider>
+          <RootNavigator />
+        </SupabaseProvider>
+      </SuperwallProvider>
+      <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
+    </ThemeProvider>
   );
 }
 

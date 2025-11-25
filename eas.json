@@ -16,6 +16,17 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "stefandukic3@icloud.com",
+        "ascAppId": "6755445110",
+        "appleTeamId": "ZBGDQF627X"
+      },
+      "android": {
+        "serviceAccountKeyPath": "./expo-supabase-starter-478620-fd69b3f559ad.json",
+        "track": "internal",
+        "releaseStatus": "draft"
+      }
+    }
   }
 }

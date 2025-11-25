@@ -10,7 +10,7 @@
     "lint": "expo lint . --fix",
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
-    "all": "npm run lint && npm run format && npm run type-check"
+    "all": "bun run lint && bun run format && bun run type-check"
   },
   "dependencies": {
     "@expo/ui": "~0.2.0-beta.7",
