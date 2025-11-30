@@ -8,11 +8,14 @@ import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 import { useUser } from "expo-superwall";
 import { useEffect, useState } from "react";
-import { StyleSheet, useUnistyles } from "react-native-unistyles";
+import { StyleSheet, withUnistyles } from "react-native-unistyles";
+
+// Wrap Switch components with withUnistyles for color mapping
+const UniSwiftSwitch = withUnistyles(SwiftSwitch);
+const UniComposeSwitch = withUnistyles(ComposeSwitch);
 
 export default function Page() {
   const { signOut } = useSupabase();
-  const { theme } = useUnistyles();
 
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
 
@@ -52,27 +55,33 @@ export default function Page() {
     if (Platform.OS === "ios") {
       return (
         <SwiftHost matchContents style={styles.switchContainer}>
-          <SwiftSwitch
+          <UniSwiftSwitch
             value={notificationsEnabled}
             onValueChange={handleNotificationsToggle}
-            color={
-              notificationsEnabled ? theme.colors.tint : theme.colors.dimmed
-            }
             label="Enable notifications"
             variant="switch"
+            uniProps={(theme) => ({
+              color: notificationsEnabled
+                ? theme.colors.tint
+                : theme.colors.dimmed,
+            })}
           />
         </SwiftHost>
       );
     }
 
     return (
-      <ComposeSwitch
+      <UniComposeSwitch
         style={styles.switchContainer}
         value={notificationsEnabled}
         onValueChange={handleNotificationsToggle}
-        color={notificationsEnabled ? theme.colors.tint : theme.colors.dimmed}
         label="Enable notifications"
         variant="switch"
+        uniProps={(theme) => ({
+          color: notificationsEnabled
+            ? theme.colors.tint
+            : theme.colors.dimmed,
+        })}
       />
     );
   };

@@ -1,5 +1,8 @@
 import { ScrollView, ScrollViewProps } from "react-native";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, withUnistyles } from "react-native-unistyles";
+
+// Wrap ScrollView with withUnistyles for automatic contentContainerStyle mapping
+const UniScrollView = withUnistyles(ScrollView);
 
 export type ThemedScrollViewProps = ScrollViewProps & {
   lightColor?: string;
@@ -14,7 +17,7 @@ export function ThemedScrollView({
   ...otherProps
 }: ThemedScrollViewProps) {
   return (
-    <ScrollView
+    <UniScrollView
       style={[styles.scrollView, style]}
       automaticallyAdjustsScrollIndicatorInsets
       contentInsetAdjustmentBehavior="automatic"

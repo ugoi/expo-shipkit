@@ -6,7 +6,12 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, withUnistyles } from "react-native-unistyles";
+
+// Wrap TextInput with withUnistyles and map placeholderTextColor to theme
+const UniTextInput = withUnistyles(TextInput, (theme) => ({
+  placeholderTextColor: theme.colors.dimmed,
+}));
 
 export default function Page() {
   const router = useRouter();
@@ -48,11 +53,10 @@ export default function Page() {
       keyboardShouldPersistTaps="handled"
     >
       <Text style={styles.label}>Code:</Text>
-      <TextInput
+      <UniTextInput
         autoCapitalize="none"
         value={token}
         placeholder="Enter verification code"
-        placeholderTextColor={styles.placeHolderTextColor.color}
         onChangeText={(token) => setToken(token)}
         keyboardType="number-pad"
         style={styles.textInput}
@@ -86,9 +90,6 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: 8,
     padding: theme.gap(1),
     backgroundColor: "transparent",
-  },
-  placeHolderTextColor: {
-    color: theme.colors.dimmed,
   },
   themedButtonColor: {
     color: theme.colors.tint,
