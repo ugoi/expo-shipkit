@@ -4,16 +4,12 @@ import { Text, TextInput, Alert } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
-import { useThemeColor } from "@/hooks/useThemeColor";
-
-import { Fonts, Typography } from "@/constants/theme";
-import { Button } from "@/components/ui/button";
+import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
+import { StyleSheet } from "react-native-unistyles";
 
 export default function Page() {
   const router = useRouter();
-  const textColor = useThemeColor({}, "text");
-  const tintColor = useThemeColor({}, "tint");
   const params = useLocalSearchParams<{ email?: string | string[] }>();
   const email = typeof params.email === "string" ? params.email : undefined;
   const { verifyOtp, isLoaded } = useSignInWithOtp();
@@ -21,7 +17,7 @@ export default function Page() {
 
   if (!email) {
     // Handle missing email - redirect back or show error
-    return <Text>Email parameter is required</Text>;
+    return <Text style={styles.label}>Email parameter is required</Text>;
   }
 
   const onSignInPress = async () => {
@@ -39,32 +35,62 @@ export default function Page() {
       console.error(JSON.stringify(err, null, 2));
       Alert.alert(
         "Verification Failed",
-        "Verification failed — please check your code and try again",
+        "Verification failed — please check your code and try again"
       );
     }
   };
 
   return (
-    <ThemedScrollView>
-      <Text style={{ color: textColor }}>Code:</Text>
+    <ThemedScrollView
+      automaticallyAdjustsScrollIndicatorInsets
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={styles.scrollViewContent}
+      keyboardShouldPersistTaps="handled"
+    >
+      <Text style={styles.label}>Code:</Text>
       <TextInput
         autoCapitalize="none"
         value={token}
         placeholder="Enter verification code"
+        placeholderTextColor={styles.placeHolderTextColor.color}
         onChangeText={(token) => setToken(token)}
         keyboardType="number-pad"
-        style={{
-          color: textColor,
-          fontFamily: Fonts.sans,
-          fontSize: Typography.body.fontSize,
-        }}
+        style={styles.textInput}
       />
-      <Button
+      <ThemedButton
         title="Continue"
         onPress={onSignInPress}
         disabled={!token}
-        color={tintColor}
+        color={styles.themedButtonColor.color}
       />
     </ThemedScrollView>
   );
 }
+
+const styles = StyleSheet.create((theme) => ({
+  scrollViewContent: {
+    padding: theme.gap(2),
+    gap: theme.gap(2),
+  },
+  label: {
+    color: theme.colors.typography,
+    fontFamily: theme.fonts.base,
+    fontSize: theme.typography.body,
+  },
+  textInput: {
+    color: theme.colors.typography,
+    fontFamily: theme.fonts.base,
+    fontSize: theme.typography.body,
+    borderColor: theme.colors.tint,
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: theme.gap(1),
+    backgroundColor: "transparent",
+  },
+  placeHolderTextColor: {
+    color: theme.colors.dimmed,
+  },
+  themedButtonColor: {
+    color: theme.colors.tint,
+  },
+}));

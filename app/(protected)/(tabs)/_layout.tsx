@@ -1,24 +1,21 @@
 import { NativeTabs, Icon, Label } from "expo-router/unstable-native-tabs";
-
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { Colors } from "@/constants/theme";
+import { useUnistyles } from "react-native-unistyles";
 
 export default function TabsLayout() {
-  const colorScheme = useColorScheme();
-  const colors = Colors[colorScheme];
+  const { theme } = useUnistyles();
 
   return (
     <NativeTabs
-      backgroundColor={colors.background}
-      indicatorColor={colors.indicatorColor}
-      badgeTextColor={colors.tabBadgeText}
+      backgroundColor={theme.colors.background}
+      indicatorColor={theme.colors.foreground}
+      badgeTextColor={theme.colors.typography}
       iconColor={{
-        default: colors.tabIconDefault,
-        selected: colors.tabIconSelected,
+        default: theme.colors.tint,
+        selected: theme.colors.activeTint,
       }}
       labelStyle={{
-        default: { color: colors.tabIconDefault },
-        selected: { color: colors.tabIconSelected },
+        default: { color: theme.colors.tint },
+        selected: { color: theme.colors.activeTint },
       }}
     >
       <NativeTabs.Trigger name="index">

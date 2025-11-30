@@ -1,28 +1,20 @@
 import { Alert, Platform, Text } from "react-native";
 
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { useSupabase } from "@/hooks/useSupabase";
-
-import { Fonts, Spacing, Typography } from "@/constants/theme";
 
 import { Switch as ComposeSwitch } from "@expo/ui/jetpack-compose";
 import { Host as SwiftHost, Switch as SwiftSwitch } from "@expo/ui/swift-ui";
-import { useMMKVBoolean } from "react-native-mmkv";
-import { Button } from "@/components/ui/button";
+import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 import { useUser } from "expo-superwall";
 import { useEffect, useState } from "react";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 export default function Page() {
   const { signOut } = useSupabase();
-  const textColor = useThemeColor({}, "text");
-  const tintColor = useThemeColor({}, "tint");
-  const switchOnColor = useThemeColor({}, "switchOn");
-  const switchOffColor = useThemeColor({}, "switchOff");
+  const { theme } = useUnistyles();
 
-  const [isDarkModeEnabled, setIsDarkModeEnabled] =
-    useMMKVBoolean("darkModeEnabled");
-  const darkModeEnabled = Boolean(isDarkModeEnabled);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
 
   const { subscriptionStatus } = useUser();
   const [isPaidUser, setIsPaidUser] = useState(false);
@@ -40,17 +32,8 @@ export default function Page() {
     }
   }, [subscriptionStatus]);
 
-  const handleDarkModeToggle = (checked: boolean) => {
-    try {
-      setIsDarkModeEnabled(checked);
-    } catch (err) {
-      console.error("Dark mode toggle error:", err);
-      // Consider showing a toast/alert to the user
-      Alert.alert(
-        "Dark Mode Toggle Failed",
-        "An error occurred while toggling dark mode. Please try again.",
-      );
-    }
+  const handleNotificationsToggle = (checked: boolean) => {
+    setNotificationsEnabled(checked);
   };
 
   const handleSignOut = async () => {
@@ -61,19 +44,21 @@ export default function Page() {
       // Consider showing a toast/alert to the user
       Alert.alert(
         "Sign Out Failed",
-        "An error occurred while signing out. Please try again.",
+        "An error occurred while signing out. Please try again."
       );
     }
   };
-  const renderDarkModeToggle = () => {
+  const renderNotificationsToggle = () => {
     if (Platform.OS === "ios") {
       return (
-        <SwiftHost matchContents style={{ marginBottom: Spacing.md }}>
+        <SwiftHost matchContents style={styles.switchContainer}>
           <SwiftSwitch
-            value={darkModeEnabled}
-            onValueChange={handleDarkModeToggle}
-            color={darkModeEnabled ? switchOnColor : switchOffColor}
-            label="Enable dark mode"
+            value={notificationsEnabled}
+            onValueChange={handleNotificationsToggle}
+            color={
+              notificationsEnabled ? theme.colors.tint : theme.colors.dimmed
+            }
+            label="Enable notifications"
             variant="switch"
           />
         </SwiftHost>
@@ -82,84 +67,49 @@ export default function Page() {
 
     return (
       <ComposeSwitch
-        style={{ marginBottom: Spacing.md }}
-        value={darkModeEnabled}
-        onValueChange={handleDarkModeToggle}
-        color={darkModeEnabled ? switchOnColor : switchOffColor}
-        label="Enable dark mode"
+        style={styles.switchContainer}
+        value={notificationsEnabled}
+        onValueChange={handleNotificationsToggle}
+        color={notificationsEnabled ? theme.colors.tint : theme.colors.dimmed}
+        label="Enable notifications"
         variant="switch"
       />
     );
   };
 
   return (
-    <ThemedSafeAreaView
-      style={{
-        justifyContent: "center",
-      }}
-    >
-      <Text
-        style={{
-          color: textColor,
-          fontFamily: Fonts.sans,
-          fontSize: Typography.body.fontSize,
-          marginBottom: Spacing.sm,
-        }}
-      >
-        Enable Dark Mode
-      </Text>
-      {darkModeEnabled ? (
-        <Text
-          style={{
-            color: textColor,
-            fontFamily: Fonts.sans,
-            fontSize: Typography.body.fontSize,
-            marginBottom: Spacing.md,
-          }}
-        >
-          Dark mode is enabled
-        </Text>
-      ) : (
-        <Text
-          style={{
-            color: textColor,
-            fontFamily: Fonts.sans,
-            fontSize: Typography.body.fontSize,
-            marginBottom: Spacing.md,
-          }}
-        >
-          Dark mode is disabled
-        </Text>
-      )}
+    <ThemedSafeAreaView style={styles.container}>
       {/* Use native UI switches per-platform to avoid HostView errors. */}
-      {renderDarkModeToggle()}
-      <Button
-        style={{ marginBottom: Spacing.md }}
+      {renderNotificationsToggle()}
+      <ThemedButton
+        style={styles.button}
         title="Sign Out"
-        color={tintColor}
+        color={styles.buttonColor.color}
         onPress={handleSignOut}
       />
-      {isPaidUser ? (
-        <Text
-          style={{
-            color: textColor,
-            fontFamily: Fonts.sans,
-            fontSize: Typography.body.fontSize,
-          }}
-        >
-          You are a paid user
-        </Text>
-      ) : (
-        <Text
-          style={{
-            color: textColor,
-            fontFamily: Fonts.sans,
-            fontSize: Typography.body.fontSize,
-          }}
-        >
-          You are on the free plan
-        </Text>
-      )}
+      <Text style={styles.planText}>
+        {isPaidUser ? "You are a paid user" : "You are on the free plan"}
+      </Text>
     </ThemedSafeAreaView>
   );
 }
+
+const styles = StyleSheet.create((theme) => ({
+  container: {
+    justifyContent: "center",
+  },
+  switchContainer: {
+    marginBottom: theme.gap(2),
+  },
+  button: {
+    marginBottom: theme.gap(2),
+  },
+  buttonColor: {
+    color: theme.colors.tint,
+  },
+  planText: {
+    color: theme.colors.typography,
+    fontFamily: theme.fonts.base,
+    fontSize: theme.typography.body,
+  },
+}));

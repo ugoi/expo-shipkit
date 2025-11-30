@@ -1,11 +1,9 @@
 import { Stack } from "expo-router";
-
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { Platform } from "react-native";
+import { useUnistyles } from "react-native-unistyles";
 
 export default function PublicLayout() {
-  const tintColor = useThemeColor({}, "tint");
-  const backgroundColor = useThemeColor({}, "background");
+  const { theme } = useUnistyles();
   return (
     <Stack initialRouteName="welcome">
       <Stack.Screen
@@ -13,11 +11,11 @@ export default function PublicLayout() {
         options={{
           title: "Welcome",
           headerTransparent: Platform.OS === "ios",
-          headerTintColor: tintColor,
+          headerTintColor: theme.colors.tint,
           headerStyle:
             Platform.OS === "ios"
               ? undefined
-              : { backgroundColor: backgroundColor },
+              : { backgroundColor: theme.colors.background },
         }}
       />
       <Stack.Screen
@@ -28,11 +26,11 @@ export default function PublicLayout() {
           headerLargeTitle: true,
           headerShadowVisible: false,
           headerBackButtonDisplayMode: "minimal",
-          headerTintColor: tintColor,
+          headerTintColor: theme.colors.tint,
           headerStyle:
             Platform.OS === "ios"
               ? undefined
-              : { backgroundColor: backgroundColor },
+              : { backgroundColor: theme.colors.background },
         }}
       />
       <Stack.Screen
@@ -43,11 +41,11 @@ export default function PublicLayout() {
           headerLargeTitle: true,
           headerShadowVisible: false,
           headerBackButtonDisplayMode: "minimal",
-          headerTintColor: tintColor,
+          headerTintColor: theme.colors.tint,
           headerStyle:
             Platform.OS === "ios"
               ? undefined
-              : { backgroundColor: backgroundColor },
+              : { backgroundColor: theme.colors.background },
         }}
       />
     </Stack>

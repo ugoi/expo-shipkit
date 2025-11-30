@@ -1,10 +1,5 @@
-import { useEffect } from "react";
-
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import React, { useEffect } from "react";
+import { useUnistyles } from "react-native-unistyles";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
@@ -12,7 +7,6 @@ import { StatusBar } from "expo-status-bar";
 import { useSupabase } from "@/hooks/useSupabase";
 import { SupabaseProvider } from "@/providers/supabase-provider";
 import { SuperwallProvider } from "@/providers/superwall-provider";
-import { useColorScheme } from "@/hooks/useColorScheme";
 
 SplashScreen.setOptions({
   duration: 500,
@@ -22,16 +16,17 @@ SplashScreen.setOptions({
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const { theme } = useUnistyles();
+  console.log("Current theme:", theme);
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <React.Fragment>
       <SuperwallProvider>
         <SupabaseProvider>
           <RootNavigator />
         </SupabaseProvider>
       </SuperwallProvider>
-      <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-    </ThemeProvider>
+      <StatusBar style="auto" />
+    </React.Fragment>
   );
 }
 

@@ -1,11 +1,10 @@
 import { useSupabase } from "@/hooks/useSupabase";
-import { useThemeColor } from "@/hooks/useThemeColor";
-import { Button } from "@/components/ui/button";
+import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
+import { StyleSheet } from "react-native-unistyles";
 
 export default function Page() {
   const { signOut } = useSupabase();
-  const tintColor = useThemeColor({}, "tint");
 
   const handleSignOut = async () => {
     try {
@@ -16,12 +15,21 @@ export default function Page() {
   };
 
   return (
-    <ThemedSafeAreaView
-      style={{
-        justifyContent: "center",
-      }}
-    >
-      <Button title="Sign Out" onPress={handleSignOut} color={tintColor} />
+    <ThemedSafeAreaView style={styles.container}>
+      <ThemedButton
+        title="Sign Out"
+        onPress={handleSignOut}
+        color={styles.buttonColor.color}
+      />
     </ThemedSafeAreaView>
   );
 }
+
+const styles = StyleSheet.create((theme) => ({
+  container: {
+    justifyContent: "center",
+  },
+  buttonColor: {
+    color: theme.colors.tint,
+  },
+}));

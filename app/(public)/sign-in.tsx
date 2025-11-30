@@ -4,18 +4,13 @@ import { TextInput } from "react-native";
 import { useRouter } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
-import { useThemeColor } from "@/hooks/useThemeColor";
-import { Fonts, Typography, Spacing } from "@/constants/theme";
-import { Button } from "@/components/ui/button";
+import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
 import { AuthError } from "@supabase/supabase-js";
+import { StyleSheet } from "react-native-unistyles";
 
 export default function Page() {
   const router = useRouter();
-  const backgroundColor = useThemeColor({}, "background");
-  const textColor = useThemeColor({}, "text");
-  const placeHolderTextColor = useThemeColor({}, "placeHolderText");
-  const tintColor = useThemeColor({}, "tint");
   const { signInWithOtp, isLoaded } = useSignInWithOtp();
 
   const [email, setEmail] = useState("");
@@ -54,8 +49,7 @@ export default function Page() {
     <ThemedScrollView
       automaticallyAdjustsScrollIndicatorInsets
       contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ padding: Spacing.md, gap: Spacing.md }}
-      style={{ backgroundColor }}
+      contentContainerStyle={styles.scrollViewContent}
       keyboardShouldPersistTaps="handled"
     >
       <TextInput
@@ -65,25 +59,39 @@ export default function Page() {
         onChangeText={setEmail}
         value={email}
         placeholder="Enter email"
-        placeholderTextColor={placeHolderTextColor}
+        placeholderTextColor={styles.placeHolderTextColor.color}
         underlineColorAndroid="transparent"
-        style={{
-          color: textColor,
-          fontFamily: Fonts.sans,
-          fontSize: Typography.body.fontSize,
-          borderColor: tintColor,
-          borderWidth: 1,
-          borderRadius: 8,
-          padding: Spacing.md,
-          backgroundColor: "transparent",
-        }}
+        style={styles.textInput}
       />
-      <Button
+      <ThemedButton
         title={isLoading ? "Sending..." : "Continue"}
         onPress={onSignInPress}
-        color={tintColor}
+        color={styles.themedButtonColor.color}
         disabled={!email || isLoading}
       />
     </ThemedScrollView>
   );
 }
+
+const styles = StyleSheet.create((theme) => ({
+  scrollViewContent: {
+    padding: theme.gap(2),
+    gap: theme.gap(2),
+  },
+  textInput: {
+    color: theme.colors.typography,
+    fontFamily: theme.fonts.base,
+    fontSize: theme.typography.body,
+    borderColor: theme.colors.tint,
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: theme.gap(1),
+    backgroundColor: "transparent",
+  },
+  placeHolderTextColor: {
+    color: theme.colors.dimmed,
+  },
+  themedButtonColor: {
+    color: theme.colors.tint,
+  },
+}));

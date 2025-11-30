@@ -1,6 +1,5 @@
-import { Spacing } from "@/constants/theme";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { ScrollView, ScrollViewProps } from "react-native";
+import { StyleSheet } from "react-native-unistyles";
 
 export type ThemedScrollViewProps = ScrollViewProps & {
   lightColor?: string;
@@ -14,22 +13,24 @@ export function ThemedScrollView({
   contentContainerStyle,
   ...otherProps
 }: ThemedScrollViewProps) {
-  const backgroundColor = useThemeColor(
-    { light: lightColor, dark: darkColor },
-    "background",
-  );
-
   return (
     <ScrollView
-      style={[{ backgroundColor }, style]}
+      style={[styles.scrollView, style]}
       automaticallyAdjustsScrollIndicatorInsets
       contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={[
-        { padding: Spacing.md, gap: Spacing.md },
-        contentContainerStyle,
-      ]}
+      contentContainerStyle={[styles.scrollViewContent, contentContainerStyle]}
       keyboardShouldPersistTaps="handled"
       {...otherProps}
     />
   );
 }
+
+const styles = StyleSheet.create((theme) => ({
+  scrollView: {
+    backgroundColor: theme.colors.background,
+  },
+  scrollViewContent: {
+    padding: theme.gap(2),
+    gap: theme.gap(2),
+  },
+}));

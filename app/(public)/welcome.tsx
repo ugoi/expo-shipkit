@@ -1,18 +1,15 @@
-import { Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { useRouter } from "expo-router";
 import { usePlacement } from "expo-superwall";
-
-import { useThemeColor } from "@/hooks/useThemeColor";
-import { Fonts, Typography, IconSizes, Spacing } from "@/constants/theme";
-import { Button } from "@/components/ui/button";
+import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
+import { StyleSheet } from "react-native-unistyles";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 
 export default function Page() {
   const router = useRouter();
-  const textColor = useThemeColor({}, "text");
-  const iconColor = useThemeColor({}, "icon");
   const { registerPlacement } = usePlacement({
     onError: (err) => console.error("Placement Error:", err),
     onPresent: (info) => console.log("Paywall Presented:", info),
@@ -31,23 +28,34 @@ export default function Page() {
 
   return (
     <ThemedSafeAreaView>
-      <Text
-        style={{
-          color: textColor,
-          fontFamily: Fonts.sans,
-          fontSize: Typography.h1.fontSize,
-          marginBottom: Spacing.md,
-        }}
-      >
-        Welcome to the App!{" "}
-        <Ionicons name="rocket" size={IconSizes.lg} color={iconColor} />
-      </Text>
-      <Button
-        title="Continue with email"
-        onPress={() => router.navigate("/sign-in")}
-      />
+      <ThemedView style={styles.container}>
+        <ThemedText type="title">
+          Welcome to the App!{" "}
+          <Ionicons
+            name="rocket"
+            size={styles.icon.size}
+            color={styles.icon.color}
+          />
+        </ThemedText>
+        <ThemedButton
+          title="Continue with email"
+          onPress={() => router.navigate("/sign-in")}
+        />
 
-      <Button title="Show Paywall" onPress={handleTriggerPlacement} />
+        <ThemedButton title="Show Paywall" onPress={handleTriggerPlacement} />
+      </ThemedView>
     </ThemedSafeAreaView>
   );
 }
+
+const styles = StyleSheet.create((theme) => ({
+  container: {
+    flexDirection: "column",
+    gap: theme.gap(2),
+    alignItems: "center",
+  },
+  icon: {
+    color: theme.colors.tint,
+    size: theme.sizes.icon.l,
+  },
+}));
