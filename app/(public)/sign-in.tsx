@@ -70,7 +70,6 @@ export default function Page() {
       <ThemedButton
         title={isLoading ? "Sending..." : "Continue"}
         onPress={onSignInPress}
-        color={styles.themedButtonColor.color}
         disabled={!email || isLoading}
       />
     </ThemedScrollView>
@@ -91,8 +90,5 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: 8,
     padding: theme.gap(1),
     backgroundColor: "transparent",
-  },
-  themedButtonColor: {
-    color: theme.colors.tint,
   },
 }));

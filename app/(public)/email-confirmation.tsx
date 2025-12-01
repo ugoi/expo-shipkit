@@ -40,7 +40,7 @@ export default function Page() {
       console.error(JSON.stringify(err, null, 2));
       Alert.alert(
         "Verification Failed",
-        "Verification failed — please check your code and try again"
+        "Verification failed — please check your code and try again",
       );
     }
   };
@@ -65,7 +65,6 @@ export default function Page() {
         title="Continue"
         onPress={onSignInPress}
         disabled={!token}
-        color={styles.themedButtonColor.color}
       />
     </ThemedScrollView>
   );
@@ -90,8 +89,5 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: 8,
     padding: theme.gap(1),
     backgroundColor: "transparent",
-  },
-  themedButtonColor: {
-    color: theme.colors.tint,
   },
 }));

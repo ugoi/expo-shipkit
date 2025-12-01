@@ -5,14 +5,12 @@ export type ThemedTextProps = TextProps & UnistylesVariants<typeof styles>;
 
 export function ThemedText({ style, type, ...rest }: ThemedTextProps) {
   styles.useVariants({ type });
-  return <Text style={[styles.textColor, styles.textType, style]} {...rest} />;
+  return <Text style={[styles.text, style]} {...rest} />;
 }
 
 const styles = StyleSheet.create((theme) => ({
-  textColor: {
+  text: {
     color: theme.colors.typography,
-  },
-  textType: {
     variants: {
       type: {
         default: {

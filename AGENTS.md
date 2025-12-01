@@ -74,6 +74,56 @@ npx expo export -p web && npx eas-cli@latest deploy   # Deploy web to EAS Hostin
 - **Gestures**: `react-native-gesture-handler` for native gesture recognition
 - **Storage**: Use `expo-sqlite` for persistent storage, `expo-sqlite/kv-store` for simple key-value storage
 
+### Styling with Unistyles
+
+When styling components, follow this decision tree for using `withUnistyles`:
+
+#### Decision Tree
+
+1. **Does the component accept `style` or `contentContainerStyle` props?**
+   - **YES**: Simply wrap with `withUnistyles` - auto-mapping handles the rest
+     ```typescript
+     const UniComponent = withUnistyles(ThirdPartyComponent);
+     ```
+   - **NO**: Go to step 2
+
+2. **Does the component need theme values in custom props?**
+   - **YES**: Provide a mapping function
+     ```typescript
+     const UniComponent = withUnistyles(Component, (theme, rt) => ({
+       customProp: theme.colors.primary,
+     }));
+     ```
+   - **NO**: Don't use `withUnistyles`
+
+3. **Do prop values depend on component state or runtime conditions?**
+   - **YES**: Use the `uniProps` function
+     ```typescript
+     <UniComponent
+       uniProps={(theme, rt) => ({
+         trackColor: isDisabled ? theme.colors.disabled : theme.colors.primary
+       })}
+     />
+     ```
+
+#### When to Use withUnistyles
+
+Use `withUnistyles` as an escape hatch for third-party components that:
+
+- Don't expose native views via ref props (preventing Unistyles from accessing `ShadowNode`)
+- Don't accept `style` or `contentContainerStyle` props but need styled values
+- Require custom prop mapping to Unistyles themes
+
+#### Priority Resolution
+
+Props are applied in this order (highest to lowest priority):
+
+1. Inline props
+2. `uniProps` mappings
+3. Global mappings from `withUnistyles`
+
+**Reference**: https://www.unistyl.es/v3/references/with-unistyles#auto-mapping-for-style-and-contentcontainerstyle-props
+
 ## Debugging & Development Tools
 
 ### DevTools Integration
@@ -106,7 +156,6 @@ If there are errors in **Expo Go** or the project is not running, create a **dev
 When working on this project:
 
 1. **Always start by consulting the appropriate documentation**:
-
    - For general Expo questions: https://docs.expo.dev/llms-full.txt
    - For EAS/deployment questions: https://docs.expo.dev/llms-eas.txt
    - For SDK/API questions: https://docs.expo.dev/llms-sdk.txt

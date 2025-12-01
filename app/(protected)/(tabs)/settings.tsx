@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 
 // Wrap Switch components with withUnistyles for color mapping
+const UniSwiftHost = withUnistyles(SwiftHost);
 const UniSwiftSwitch = withUnistyles(SwiftSwitch);
 const UniComposeSwitch = withUnistyles(ComposeSwitch);
 
@@ -47,14 +48,14 @@ export default function Page() {
       // Consider showing a toast/alert to the user
       Alert.alert(
         "Sign Out Failed",
-        "An error occurred while signing out. Please try again."
+        "An error occurred while signing out. Please try again.",
       );
     }
   };
   const renderNotificationsToggle = () => {
     if (Platform.OS === "ios") {
       return (
-        <SwiftHost matchContents style={styles.switchContainer}>
+        <UniSwiftHost matchContents style={styles.switchContainer}>
           <UniSwiftSwitch
             value={notificationsEnabled}
             onValueChange={handleNotificationsToggle}
@@ -66,7 +67,7 @@ export default function Page() {
                 : theme.colors.dimmed,
             })}
           />
-        </SwiftHost>
+        </UniSwiftHost>
       );
     }
 
@@ -78,9 +79,7 @@ export default function Page() {
         label="Enable notifications"
         variant="switch"
         uniProps={(theme) => ({
-          color: notificationsEnabled
-            ? theme.colors.tint
-            : theme.colors.dimmed,
+          color: notificationsEnabled ? theme.colors.tint : theme.colors.dimmed,
         })}
       />
     );
@@ -93,7 +92,6 @@ export default function Page() {
       <ThemedButton
         style={styles.button}
         title="Sign Out"
-        color={styles.buttonColor.color}
         onPress={handleSignOut}
       />
       <Text style={styles.planText}>
@@ -112,9 +110,6 @@ const styles = StyleSheet.create((theme) => ({
   },
   button: {
     marginBottom: theme.gap(2),
-  },
-  buttonColor: {
-    color: theme.colors.tint,
   },
   planText: {
     color: theme.colors.typography,

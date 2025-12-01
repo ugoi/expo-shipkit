@@ -4,9 +4,15 @@ import { useRouter } from "expo-router";
 import { usePlacement } from "expo-superwall";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+
+// Wrap TextInput with withUnistyles and map placeholderTextColor to theme
+const UniIonicons = withUnistyles(Ionicons, (theme) => ({
+  color: theme.colors.tint,
+  size: theme.sizes.icon.l,
+}));
 
 export default function Page() {
   const router = useRouter();
@@ -30,12 +36,7 @@ export default function Page() {
     <ThemedSafeAreaView>
       <ThemedView style={styles.container}>
         <ThemedText type="title">
-          Welcome to the App!{" "}
-          <Ionicons
-            name="rocket"
-            size={styles.icon.size}
-            color={styles.icon.color}
-          />
+          Welcome to the App! <UniIonicons name="rocket" />
         </ThemedText>
         <ThemedButton
           title="Continue with email"
@@ -53,9 +54,5 @@ const styles = StyleSheet.create((theme) => ({
     flexDirection: "column",
     gap: theme.gap(2),
     alignItems: "center",
-  },
-  icon: {
-    color: theme.colors.tint,
-    size: theme.sizes.icon.l,
   },
 }));

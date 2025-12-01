@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native-unistyles";
 export function ThemedButton({
   title,
   onPress,
-  color,
   disabled,
   style,
 }: {
@@ -14,20 +13,17 @@ export function ThemedButton({
   disabled?: boolean;
   style?: object;
 }) {
-  const { button, buttonText, disabledButton, disabledText } = styles;
-
+  styles.useVariants({
+    opacity: !disabled,
+  });
   return (
     <Pressable
       disabled={disabled}
       accessibilityState={{ disabled }}
-      style={[
-        button,
-        disabled ? disabledButton : color ? { backgroundColor: color } : {},
-        style,
-      ]}
+      style={[styles.button, style]}
       onPress={onPress}
     >
-      <Text style={[buttonText, disabled && disabledText]}>{title}</Text>
+      <Text style={[styles.buttonText]}>{title}</Text>
     </Pressable>
   );
 }
@@ -39,17 +35,25 @@ const styles = StyleSheet.create((theme) => ({
     paddingHorizontal: theme.gap(2),
     borderRadius: 8,
     alignItems: "center",
+    variants: {
+      opacity: {
+        true: { opacity: 0.5 },
+        false: { opacity: 0.5 },
+        default: { opacity: 1.0 },
+      },
+    },
   },
   buttonText: {
     color: theme.colors.background,
     fontFamily: theme.fonts.base,
     fontWeight: "600",
     fontSize: theme.typography.button,
-  },
-  disabledButton: {
-    opacity: 0.5,
-  },
-  disabledText: {
-    color: theme.colors.background,
+    variants: {
+      opacity: {
+        true: { opacity: 0.5 },
+        false: { opacity: 0.5 },
+        default: { opacity: 1.0 },
+      },
+    },
   },
 }));

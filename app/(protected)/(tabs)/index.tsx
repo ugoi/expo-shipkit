@@ -16,11 +16,7 @@ export default function Page() {
 
   return (
     <ThemedSafeAreaView style={styles.container}>
-      <ThemedButton
-        title="Sign Out"
-        onPress={handleSignOut}
-        color={styles.buttonColor.color}
-      />
+      <ThemedButton title="Sign Out" onPress={handleSignOut} />
     </ThemedSafeAreaView>
   );
 }
@@ -28,8 +24,5 @@ export default function Page() {
 const styles = StyleSheet.create((theme) => ({
   container: {
     justifyContent: "center",
-  },
-  buttonColor: {
-    color: theme.colors.tint,
   },
 }));
