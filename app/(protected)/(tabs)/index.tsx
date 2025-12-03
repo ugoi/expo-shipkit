@@ -1,7 +1,6 @@
 import { useSupabase } from "@/hooks/useSupabase";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
-import { StyleSheet } from "react-native-unistyles";
+import { ThemedScrollView } from "@/components/themed-scroll-view";
 
 export default function Page() {
   const { signOut } = useSupabase();
@@ -15,14 +14,8 @@ export default function Page() {
   };
 
   return (
-    <ThemedSafeAreaView style={styles.container}>
+    <ThemedScrollView>
       <ThemedButton title="Sign Out" onPress={handleSignOut} />
-    </ThemedSafeAreaView>
+    </ThemedScrollView>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    justifyContent: "center",
-  },
-}));

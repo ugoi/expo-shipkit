@@ -5,8 +5,9 @@ import { useSupabase } from "@/hooks/useSupabase";
 import { Switch as ComposeSwitch } from "@expo/ui/jetpack-compose";
 import { Host as SwiftHost, Switch as SwiftSwitch } from "@expo/ui/swift-ui";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
+import { ThemedScrollView } from "@/components/themed-scroll-view";
 import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 import { useUser } from "expo-superwall";
 import { useEffect, useState } from "react";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
@@ -56,60 +57,63 @@ export default function Page() {
   const renderNotificationsToggle = () => {
     if (Platform.OS === "ios") {
       return (
-        <UniSwiftHost matchContents style={styles.switchContainer}>
-          <UniSwiftSwitch
-            value={notificationsEnabled}
-            onValueChange={handleNotificationsToggle}
-            label="Enable notifications"
-            variant="switch"
-            uniProps={(theme) => ({
-              color: notificationsEnabled
-                ? theme.colors.tint
-                : theme.colors.dimmed,
-            })}
-          />
-        </UniSwiftHost>
+        <ThemedView style={styles.settingRow}>
+          <ThemedText>Notifications</ThemedText>
+          <UniSwiftHost matchContents>
+            <UniSwiftSwitch
+              value={notificationsEnabled}
+              onValueChange={handleNotificationsToggle}
+              variant="switch"
+              uniProps={(theme) => ({
+                color: notificationsEnabled
+                  ? theme.colors.tint
+                  : theme.colors.dimmed,
+              })}
+            />
+          </UniSwiftHost>
+        </ThemedView>
       );
     }
 
     return (
-      <UniComposeSwitch
-        style={styles.switchContainer}
-        value={notificationsEnabled}
-        onValueChange={handleNotificationsToggle}
-        label="Enable notifications"
-        variant="switch"
-        uniProps={(theme) => ({
-          color: notificationsEnabled ? theme.colors.tint : theme.colors.dimmed,
-        })}
-      />
+      <ThemedView style={styles.settingRow}>
+        <ThemedText>Notifications</ThemedText>
+        <UniComposeSwitch
+          value={notificationsEnabled}
+          onValueChange={handleNotificationsToggle}
+          variant="switch"
+          uniProps={(theme) => ({
+            color: notificationsEnabled
+              ? theme.colors.tint
+              : theme.colors.dimmed,
+          })}
+        />
+      </ThemedView>
     );
   };
 
   return (
-    <ThemedSafeAreaView style={styles.container}>
+    <ThemedScrollView contentContainerStyle={styles.contentContainer}>
       {/* Use native UI switches per-platform to avoid HostView errors. */}
       {renderNotificationsToggle()}
-      <ThemedButton
-        style={styles.button}
-        title="Sign Out"
-        onPress={handleSignOut}
-      />
-      <ThemedText>
+      <ThemedButton title="Sign Out" onPress={handleSignOut} />
+      <ThemedText style={styles.subscriptionText}>
         {isPaidUser ? "You are a paid user" : "You are on the free plan"}
       </ThemedText>
-    </ThemedSafeAreaView>
+    </ThemedScrollView>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
-  container: {
-    justifyContent: "center",
+  contentContainer: {
+    paddingTop: theme.gap(2),
   },
-  switchContainer: {
-    marginBottom: theme.gap(2),
+  settingRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-  button: {
-    marginBottom: theme.gap(2),
+  subscriptionText: {
+    textAlign: "center",
   },
 }));

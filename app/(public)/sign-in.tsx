@@ -5,7 +5,7 @@ import { useRouter } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { ThemedScrollView } from "@/components/themed-scroll-view";
+import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 import { AuthError } from "@supabase/supabase-js";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 
@@ -51,19 +51,14 @@ export default function Page() {
   };
 
   return (
-    <ThemedScrollView
-      automaticallyAdjustsScrollIndicatorInsets
-      contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={styles.scrollViewContent}
-      keyboardShouldPersistTaps="handled"
-    >
+    <ThemedSafeAreaView style={styles.container}>
       <UniTextInput
         autoCapitalize="none"
         autoCorrect={false}
         keyboardType="email-address"
         onChangeText={setEmail}
         value={email}
-        placeholder="Enter email"
+        placeholder="Email"
         underlineColorAndroid="transparent"
         style={styles.textInput}
       />
@@ -72,14 +67,16 @@ export default function Page() {
         onPress={onSignInPress}
         disabled={!email || isLoading}
       />
-    </ThemedScrollView>
+    </ThemedSafeAreaView>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
-  scrollViewContent: {
+  container: {
     padding: theme.gap(2),
     gap: theme.gap(2),
+    alignItems: "stretch",
+    justifyContent: "flex-start",
   },
   textInput: {
     color: theme.colors.typography,
@@ -88,7 +85,7 @@ const styles = StyleSheet.create((theme) => ({
     borderColor: theme.colors.tint,
     borderWidth: 1,
     borderRadius: 8,
-    padding: theme.gap(1),
+    padding: theme.gap(2),
     backgroundColor: "transparent",
   },
 }));

@@ -1,9 +1,8 @@
-import { type ViewProps } from "react-native";
+import { View, type ViewProps } from "react-native";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 // ✨ Magic auto mapping
-const UniSafeAreaView = withUnistyles(SafeAreaView);
+const UniView = withUnistyles(View);
 
 export type ThemedSafeAreaViewProps = ViewProps & {
   lightColor?: string;
@@ -16,14 +15,15 @@ export function ThemedSafeAreaView({
   darkColor,
   ...otherProps
 }: ThemedSafeAreaViewProps) {
-  return <UniSafeAreaView style={[styles.container, style]} {...otherProps} />;
+  return <UniView style={[styles.container, style]} {...otherProps} />;
 }
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-end",
     backgroundColor: theme.colors.background,
+    paddingBottom: rt.insets.bottom,
   },
 }));

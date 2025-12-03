@@ -53,6 +53,7 @@ const styles = StyleSheet.create((theme) => ({
   container: {
     flexDirection: "column",
     gap: theme.gap(2),
-    alignItems: "center",
+    alignItems: "stretch",
+    paddingHorizontal: theme.gap(2),
   },
 }));

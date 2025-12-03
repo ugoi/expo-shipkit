@@ -31,9 +31,9 @@ export function ThemedButton({
 const styles = StyleSheet.create((theme) => ({
   button: {
     backgroundColor: theme.colors.tint,
-    paddingVertical: theme.gap(1),
+    paddingVertical: theme.gap(2),
     paddingHorizontal: theme.gap(2),
-    borderRadius: 8,
+    borderRadius: 24,
     alignItems: "center",
     variants: {
       disabled: {

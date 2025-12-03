@@ -1,5 +1,4 @@
 import { Stack } from "expo-router";
-import { Platform } from "react-native";
 import { useUnistyles } from "react-native-unistyles";
 
 export default function PublicLayout() {
@@ -10,42 +9,35 @@ export default function PublicLayout() {
         name="welcome"
         options={{
           title: "Welcome",
-          headerTransparent: Platform.OS === "ios",
+          headerShown: false,
+          headerTransparent: false,
+          headerShadowVisible: false,
           headerTintColor: theme.colors.tint,
-          headerStyle:
-            Platform.OS === "ios"
-              ? undefined
-              : { backgroundColor: theme.colors.background },
+          headerStyle: { backgroundColor: theme.colors.background },
         }}
       />
       <Stack.Screen
         name="sign-in"
         options={{
           title: "Sign In",
-          headerTransparent: Platform.OS === "ios",
+          headerTransparent: false,
           headerLargeTitle: true,
           headerShadowVisible: false,
           headerBackButtonDisplayMode: "minimal",
           headerTintColor: theme.colors.tint,
-          headerStyle:
-            Platform.OS === "ios"
-              ? undefined
-              : { backgroundColor: theme.colors.background },
+          headerStyle: { backgroundColor: theme.colors.background },
         }}
       />
       <Stack.Screen
         name="email-confirmation"
         options={{
           title: "Email Confirmation",
-          headerTransparent: Platform.OS === "ios",
+          headerTransparent: false,
           headerLargeTitle: true,
           headerShadowVisible: false,
           headerBackButtonDisplayMode: "minimal",
           headerTintColor: theme.colors.tint,
-          headerStyle:
-            Platform.OS === "ios"
-              ? undefined
-              : { backgroundColor: theme.colors.background },
+          headerStyle: { backgroundColor: theme.colors.background },
         }}
       />
     </Stack>
