@@ -14,7 +14,7 @@ export function ThemedButton({
   style?: object;
 }) {
   styles.useVariants({
-    opacity: !disabled,
+    disabled: !!disabled,
   });
   return (
     <Pressable
@@ -36,10 +36,9 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: 8,
     alignItems: "center",
     variants: {
-      opacity: {
+      disabled: {
         true: { opacity: 0.5 },
-        false: { opacity: 0.5 },
-        default: { opacity: 1.0 },
+        false: { opacity: 1.0 },
       },
     },
   },
@@ -48,12 +47,5 @@ const styles = StyleSheet.create((theme) => ({
     fontFamily: theme.fonts.base,
     fontWeight: "600",
     fontSize: theme.typography.button,
-    variants: {
-      opacity: {
-        true: { opacity: 0.5 },
-        false: { opacity: 0.5 },
-        default: { opacity: 1.0 },
-      },
-    },
   },
 }));

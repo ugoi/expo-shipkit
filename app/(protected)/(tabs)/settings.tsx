@@ -1,4 +1,4 @@
-import { Alert, Platform, Text } from "react-native";
+import { Alert, Platform } from "react-native";
 
 import { useSupabase } from "@/hooks/useSupabase";
 
@@ -6,6 +6,7 @@ import { Switch as ComposeSwitch } from "@expo/ui/jetpack-compose";
 import { Host as SwiftHost, Switch as SwiftSwitch } from "@expo/ui/swift-ui";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
+import { ThemedText } from "@/components/themed-text";
 import { useUser } from "expo-superwall";
 import { useEffect, useState } from "react";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
@@ -94,9 +95,9 @@ export default function Page() {
         title="Sign Out"
         onPress={handleSignOut}
       />
-      <Text style={styles.planText}>
+      <ThemedText>
         {isPaidUser ? "You are a paid user" : "You are on the free plan"}
-      </Text>
+      </ThemedText>
     </ThemedSafeAreaView>
   );
 }
@@ -110,10 +111,5 @@ const styles = StyleSheet.create((theme) => ({
   },
   button: {
     marginBottom: theme.gap(2),
-  },
-  planText: {
-    color: theme.colors.typography,
-    fontFamily: theme.fonts.base,
-    fontSize: theme.typography.body,
   },
 }));

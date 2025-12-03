@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Text, TextInput, Alert } from "react-native";
+import { TextInput, Alert } from "react-native";
 
 import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
+import { ThemedText } from "@/components/themed-text";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 
 // Wrap TextInput with withUnistyles and map placeholderTextColor to theme
@@ -22,7 +23,7 @@ export default function Page() {
 
   if (!email) {
     // Handle missing email - redirect back or show error
-    return <Text style={styles.label}>Email parameter is required</Text>;
+    return <ThemedText>Email parameter is required</ThemedText>;
   }
 
   const onSignInPress = async () => {
@@ -52,7 +53,7 @@ export default function Page() {
       contentContainerStyle={styles.scrollViewContent}
       keyboardShouldPersistTaps="handled"
     >
-      <Text style={styles.label}>Code:</Text>
+      <ThemedText>Code:</ThemedText>
       <UniTextInput
         autoCapitalize="none"
         value={token}
@@ -74,11 +75,6 @@ const styles = StyleSheet.create((theme) => ({
   scrollViewContent: {
     padding: theme.gap(2),
     gap: theme.gap(2),
-  },
-  label: {
-    color: theme.colors.typography,
-    fontFamily: theme.fonts.base,
-    fontSize: theme.typography.body,
   },
   textInput: {
     color: theme.colors.typography,
