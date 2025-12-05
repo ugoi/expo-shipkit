@@ -19,8 +19,6 @@ export function ThemedScrollView({
   return (
     <UniScrollView
       style={[styles.scrollView, style]}
-      automaticallyAdjustsScrollIndicatorInsets
-      contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={[styles.scrollViewContent, contentContainerStyle]}
       keyboardShouldPersistTaps="handled"
       {...otherProps}
@@ -28,12 +26,14 @@ export function ThemedScrollView({
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create((theme, rt) => ({
   scrollView: {
     backgroundColor: theme.colors.background,
   },
   scrollViewContent: {
-    padding: theme.gap(2),
+    flexGrow: 1,
+    marginTop: rt.insets.top,
+    paddingHorizontal: theme.gap(2),
     gap: theme.gap(2),
   },
 }));

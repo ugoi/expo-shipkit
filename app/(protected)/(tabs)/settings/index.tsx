@@ -10,7 +10,12 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useUser } from "expo-superwall";
 import { useEffect, useState } from "react";
-import { StyleSheet, withUnistyles } from "react-native-unistyles";
+import {
+  StyleSheet,
+  UnistylesRuntime,
+  withUnistyles,
+} from "react-native-unistyles";
+import { SettingTile } from "@/components/setting-tile";
 
 // Wrap Switch components with withUnistyles for color mapping
 const UniSwiftHost = withUnistyles(SwiftHost);
@@ -18,6 +23,7 @@ const UniSwiftSwitch = withUnistyles(SwiftSwitch);
 const UniComposeSwitch = withUnistyles(ComposeSwitch);
 
 export default function Page() {
+  const systemTheme = UnistylesRuntime.hasAdaptiveThemes;
   const { signOut } = useSupabase();
 
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
@@ -50,7 +56,7 @@ export default function Page() {
       // Consider showing a toast/alert to the user
       Alert.alert(
         "Sign Out Failed",
-        "An error occurred while signing out. Please try again.",
+        "An error occurred while signing out. Please try again."
       );
     }
   };
@@ -93,20 +99,37 @@ export default function Page() {
   };
 
   return (
-    <ThemedScrollView contentContainerStyle={styles.contentContainer}>
-      {/* Use native UI switches per-platform to avoid HostView errors. */}
-      {renderNotificationsToggle()}
-      <ThemedButton title="Sign Out" onPress={handleSignOut} />
-      <ThemedText style={styles.subscriptionText}>
-        {isPaidUser ? "You are a paid user" : "You are on the free plan"}
-      </ThemedText>
-    </ThemedScrollView>
+    <ThemedView style={styles.container}>
+      <ThemedScrollView>
+        <ThemedText type="title">Settings</ThemedText>
+        {/* Use native UI switches per-platform to avoid HostView errors. */}
+        {renderNotificationsToggle()}
+        <ThemedView>
+          <SettingTile
+            settingName="Theme"
+            selectedValue="Light"
+            description={systemTheme ? "System" : "User"}
+            onPress={() => {}}
+          />
+          <SettingTile
+            settingName="App accent"
+            selectedValue="Default"
+            description="Primary app color"
+            onPress={() => {}}
+          />
+        </ThemedView>
+        <ThemedButton title="Sign Out" onPress={handleSignOut} />
+        <ThemedText style={styles.subscriptionText}>
+          {isPaidUser ? "You are a paid user" : "You are on the free plan"}
+        </ThemedText>
+      </ThemedScrollView>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
-  contentContainer: {
-    paddingTop: theme.gap(2),
+  container: {
+    flex: 1,
   },
   settingRow: {
     flexDirection: "row",

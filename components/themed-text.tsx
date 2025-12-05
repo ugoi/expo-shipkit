@@ -3,8 +3,14 @@ import { StyleSheet, type UnistylesVariants } from "react-native-unistyles";
 
 export type ThemedTextProps = TextProps & UnistylesVariants<typeof styles>;
 
-export function ThemedText({ style, type, ...rest }: ThemedTextProps) {
-  styles.useVariants({ type });
+export function ThemedText({
+  style,
+  type,
+  bold,
+  dimmed,
+  ...rest
+}: ThemedTextProps) {
+  styles.useVariants({ type, bold, dimmed });
   return <Text style={[styles.text, style]} {...rest} />;
 }
 
@@ -30,6 +36,16 @@ const styles = StyleSheet.create((theme) => ({
           lineHeight: 30,
           fontSize: 16,
           color: theme.colors.link,
+        },
+      },
+      bold: {
+        true: {
+          fontWeight: "bold",
+        },
+      },
+      dimmed: {
+        true: {
+          color: theme.colors.tint,
         },
       },
     },
