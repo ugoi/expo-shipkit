@@ -3,7 +3,6 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import { usePlacement } from "expo-superwall";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";

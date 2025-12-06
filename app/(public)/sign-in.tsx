@@ -5,7 +5,6 @@ import { useRouter } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 import { AuthError } from "@supabase/supabase-js";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import { ThemedView } from "@/components/themed-view";
@@ -50,15 +49,6 @@ export default function Page() {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const debugOnSignInPress = () => {
-    console.log("Sign-in pressed with email:", email);
-    // navigate to confirmation for debugging
-    router.navigate({
-      pathname: "/email-confirmation",
-      params: { email },
-    });
   };
 
   return (

@@ -1,7 +1,6 @@
 import { SettingOptionRadio } from "@/components/setting-option-radio";
 import { ThemeColor } from "@/components/theme-color";
 import { ThemedView } from "@/components/themed-view";
-import { use } from "react";
 import { ScrollView } from "react-native";
 import {
   StyleSheet,

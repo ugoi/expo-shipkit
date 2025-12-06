@@ -1,7 +1,7 @@
 import { NativeTabs, Icon, Label } from "expo-router/unstable-native-tabs";
 // import { useEffect } from "react";
 // import { Appearance } from "react-native";
-import { useUnistyles, UnistylesRuntime } from "react-native-unistyles";
+import { useUnistyles } from "react-native-unistyles";
 
 export default function TabsLayout() {
   const { theme } = useUnistyles();

@@ -5,7 +5,6 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 import { ThemedText } from "@/components/themed-text";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
@@ -44,7 +43,7 @@ export default function Page() {
       console.error(JSON.stringify(err, null, 2));
       Alert.alert(
         "Verification Failed",
-        "Verification failed — please check your code and try again",
+        "Verification failed — please check your code and try again"
       );
     }
   };
@@ -56,7 +55,7 @@ export default function Page() {
         contentContainerStyle={styles.scrollView}
       >
         <ThemedText style={styles.dimmedText}>
-          Please enter the 4-digit verification code we've just sent to{" "}
+          Please enter the 4-digit verification code we&apos;ve just sent to{" "}
           <ThemedText style={styles.emailText}>{email}</ThemedText>
         </ThemedText>
         <UniTextInput
