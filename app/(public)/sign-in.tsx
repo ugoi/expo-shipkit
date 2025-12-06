@@ -8,6 +8,8 @@ import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 import { AuthError } from "@supabase/supabase-js";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
+import { ThemedView } from "@/components/themed-view";
+import { ThemedScrollView } from "@/components/themed-scroll-view";
 
 // Wrap TextInput with withUnistyles and map placeholderTextColor to theme
 const UniTextInput = withUnistyles(TextInput, (theme) => ({
@@ -50,33 +52,50 @@ export default function Page() {
     }
   };
 
+  const debugOnSignInPress = () => {
+    console.log("Sign-in pressed with email:", email);
+    // navigate to confirmation for debugging
+    router.navigate({
+      pathname: "/email-confirmation",
+      params: { email },
+    });
+  };
+
   return (
-    <ThemedSafeAreaView style={styles.container}>
-      <UniTextInput
-        autoCapitalize="none"
-        autoCorrect={false}
-        keyboardType="email-address"
-        onChangeText={setEmail}
-        value={email}
-        placeholder="Email"
-        underlineColorAndroid="transparent"
-        style={styles.textInput}
-      />
-      <ThemedButton
-        title={isLoading ? "Sending..." : "Continue"}
-        onPress={onSignInPress}
-        disabled={!email || isLoading}
-      />
-    </ThemedSafeAreaView>
+    <ThemedView style={{ flex: 1 }}>
+      <ThemedScrollView
+        alwaysBounceVertical={false}
+        contentContainerStyle={styles.scrollView}
+      >
+        <UniTextInput
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="email-address"
+          onChangeText={setEmail}
+          value={email}
+          placeholder="Email"
+          underlineColorAndroid="transparent"
+          style={styles.textInput}
+        />
+        <ThemedButton
+          title={isLoading ? "Sending..." : "Continue"}
+          onPress={onSignInPress}
+          disabled={!email || isLoading}
+        />
+      </ThemedScrollView>
+    </ThemedView>
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
-  container: {
+const styles = StyleSheet.create((theme, rt) => ({
+  scrollView: {
     padding: theme.gap(2),
     gap: theme.gap(2),
     alignItems: "stretch",
     justifyContent: "flex-start",
+    marginTop: rt.insets.top,
+    flexGrow: 1,
+    paddingHorizontal: theme.gap(2),
   },
   textInput: {
     color: theme.colors.typography,
@@ -89,3 +108,5 @@ const styles = StyleSheet.create((theme) => ({
     backgroundColor: "transparent",
   },
 }));
+
+console.log(styles);

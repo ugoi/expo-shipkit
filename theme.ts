@@ -17,7 +17,7 @@ const typography = {
   h2: 24,
   h3: 20,
   body: 16,
-  caption: 12,
+  caption: 14,
   button: 16,
   input: 16,
 } as const;
@@ -33,7 +33,7 @@ export const lightTheme = {
     background: "#FCFAF8",
     foreground: "#EDEAE6",
     typography: "#1B140C",
-    dimmed: "#ECE8E4",
+    dimmed: "#C5C0BA",
     tint: "#9A734C",
     activeTint: "#1B140C",
     link: "#1E3799",

@@ -19,7 +19,7 @@ export function ThemedScrollView({
   return (
     <UniScrollView
       style={[styles.scrollView, style]}
-      contentContainerStyle={[styles.scrollViewContent, contentContainerStyle]}
+      contentContainerStyle={[contentContainerStyle]}
       keyboardShouldPersistTaps="handled"
       {...otherProps}
     />
@@ -29,11 +29,5 @@ export function ThemedScrollView({
 const styles = StyleSheet.create((theme, rt) => ({
   scrollView: {
     backgroundColor: theme.colors.background,
-  },
-  scrollViewContent: {
-    flexGrow: 1,
-    marginTop: rt.insets.top,
-    paddingHorizontal: theme.gap(2),
-    gap: theme.gap(2),
   },
 }));

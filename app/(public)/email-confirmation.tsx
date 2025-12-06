@@ -8,6 +8,8 @@ import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 import { ThemedText } from "@/components/themed-text";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
+import { ThemedScrollView } from "@/components/themed-scroll-view";
+import { ThemedView } from "@/components/themed-view";
 
 // Wrap TextInput with withUnistyles and map placeholderTextColor to theme
 const UniTextInput = withUnistyles(TextInput, (theme) => ({
@@ -23,6 +25,7 @@ export default function Page() {
 
   if (!email) {
     // Handle missing email - redirect back or show error
+    console.error("Email parameter is missing");
     return <ThemedText>Email parameter is required</ThemedText>;
   }
 
@@ -47,31 +50,42 @@ export default function Page() {
   };
 
   return (
-    <ThemedSafeAreaView style={styles.container}>
-      <ThemedText>Code:</ThemedText>
-      <UniTextInput
-        autoCapitalize="none"
-        value={token}
-        placeholder="Enter verification code"
-        onChangeText={(token) => setToken(token)}
-        keyboardType="number-pad"
-        style={styles.textInput}
-      />
-      <ThemedButton
-        title="Continue"
-        onPress={onSignInPress}
-        disabled={!token}
-      />
-    </ThemedSafeAreaView>
+    <ThemedView style={{ flex: 1 }}>
+      <ThemedScrollView
+        alwaysBounceVertical={false}
+        contentContainerStyle={styles.scrollView}
+      >
+        <ThemedText style={styles.dimmedText}>
+          Please enter the 4-digit verification code we've just sent to{" "}
+          <ThemedText style={styles.emailText}>{email}</ThemedText>
+        </ThemedText>
+        <UniTextInput
+          autoCapitalize="none"
+          value={token}
+          placeholder="Enter verification code"
+          onChangeText={(token) => setToken(token)}
+          keyboardType="number-pad"
+          style={styles.textInput}
+        />
+        <ThemedButton
+          title="Continue"
+          onPress={onSignInPress}
+          disabled={!token}
+        />
+      </ThemedScrollView>
+    </ThemedView>
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
-  container: {
+const styles = StyleSheet.create((theme, rt) => ({
+  scrollView: {
     padding: theme.gap(2),
     gap: theme.gap(2),
     alignItems: "stretch",
     justifyContent: "flex-start",
+    marginTop: rt.insets.top,
+    flexGrow: 1,
+    paddingHorizontal: theme.gap(2),
   },
   textInput: {
     color: theme.colors.typography,
@@ -82,5 +96,15 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: 8,
     padding: theme.gap(2),
     backgroundColor: "transparent",
+  },
+  dimmedText: {
+    color: theme.colors.dimmed,
+    fontFamily: theme.fonts.base,
+    fontSize: theme.typography.body,
+  },
+  emailText: {
+    color: theme.colors.typography,
+    fontFamily: theme.fonts.base,
+    fontSize: theme.typography.body,
   },
 }));

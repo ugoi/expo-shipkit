@@ -18,15 +18,21 @@ export default function Page() {
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedScrollView>
+      <ThemedScrollView contentContainerStyle={styles.scrollView}>
         <ThemedText type="title">Home Screen</ThemedText>
         <ThemedButton title="Sign Out" onPress={handleSignOut} />
       </ThemedScrollView>
     </ThemedView>
   );
 }
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
+  },
+  scrollView: {
+    marginTop: rt.insets.top,
+    flexGrow: 1,
+    paddingHorizontal: theme.gap(2),
+    gap: theme.gap(2),
   },
 }));

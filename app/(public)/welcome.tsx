@@ -7,6 +7,7 @@ import { ThemedSafeAreaView } from "@/components/themed-safe-area-view";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { ThemedScrollView } from "@/components/themed-scroll-view";
 
 // Wrap TextInput with withUnistyles and map placeholderTextColor to theme
 const UniIonicons = withUnistyles(Ionicons, (theme) => ({
@@ -33,8 +34,11 @@ export default function Page() {
   };
 
   return (
-    <ThemedSafeAreaView>
-      <ThemedView style={styles.container}>
+    <ThemedView style={{ flex: 1 }}>
+      <ThemedScrollView
+        alwaysBounceVertical={false}
+        contentContainerStyle={styles.scrollView}
+      >
         <ThemedText type="title">
           Welcome to the App! <UniIonicons name="rocket" />
         </ThemedText>
@@ -44,16 +48,20 @@ export default function Page() {
         />
 
         <ThemedButton title="Show Paywall" onPress={handleTriggerPlacement} />
-      </ThemedView>
-    </ThemedSafeAreaView>
+      </ThemedScrollView>
+    </ThemedView>
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flexDirection: "column",
+const styles = StyleSheet.create((theme, rt) => ({
+  scrollView: {
+    marginTop: rt.insets.top,
+    marginBottom: rt.insets.bottom,
+    padding: theme.gap(2),
     gap: theme.gap(2),
     alignItems: "stretch",
+    justifyContent: "flex-end",
+    flexGrow: 1,
     paddingHorizontal: theme.gap(2),
   },
 }));
