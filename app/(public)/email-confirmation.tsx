@@ -9,7 +9,7 @@ import { ThemedText } from "@/components/themed-text";
 import { StyleSheet } from "react-native-unistyles";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
 import { ThemedView } from "@/components/themed-view";
-import { UniTextInput } from "@/components/uni-text-input";
+import { ThemedTextInput } from "@/components/themed-text-input";
 
 export default function Page() {
   const router = useRouter();
@@ -54,13 +54,12 @@ export default function Page() {
           Please enter the 4-digit verification code we&apos;ve just sent to{" "}
           <ThemedText style={styles.emailText}>{email}</ThemedText>
         </ThemedText>
-        <UniTextInput
+        <ThemedTextInput
           autoCapitalize="none"
           value={token}
           placeholder="Enter verification code"
           onChangeText={(token) => setToken(token)}
           keyboardType="number-pad"
-          style={styles.textInput}
         />
         <ThemedButton
           title="Continue"
@@ -72,25 +71,13 @@ export default function Page() {
   );
 }
 
-const styles = StyleSheet.create((theme, rt) => ({
+const styles = StyleSheet.create((theme) => ({
   scrollView: {
     padding: theme.gap(2),
     gap: theme.gap(2),
     alignItems: "stretch",
     justifyContent: "flex-start",
-    marginTop: rt.insets.top,
     flexGrow: 1,
-    paddingHorizontal: theme.gap(2),
-  },
-  textInput: {
-    color: theme.colors.typography,
-    fontFamily: theme.fonts.base,
-    fontSize: theme.typography.body,
-    borderColor: theme.colors.tint,
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: theme.gap(2),
-    backgroundColor: "transparent",
   },
   dimmedText: {
     color: theme.colors.dimmed,

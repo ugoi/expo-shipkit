@@ -8,7 +8,7 @@ import { AuthError } from "@supabase/supabase-js";
 import { StyleSheet } from "react-native-unistyles";
 import { ThemedView } from "@/components/themed-view";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
-import { UniTextInput } from "@/components/uni-text-input";
+import { ThemedTextInput } from "@/components/themed-text-input";
 
 export default function Page() {
   const router = useRouter();
@@ -52,15 +52,13 @@ export default function Page() {
         alwaysBounceVertical={false}
         contentContainerStyle={styles.scrollView}
       >
-        <UniTextInput
+        <ThemedTextInput
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="email-address"
           onChangeText={setEmail}
           value={email}
           placeholder="Email"
-          underlineColorAndroid="transparent"
-          style={styles.textInput}
         />
         <ThemedButton
           title={isLoading ? "Sending..." : "Continue"}
@@ -72,24 +70,12 @@ export default function Page() {
   );
 }
 
-const styles = StyleSheet.create((theme, rt) => ({
+const styles = StyleSheet.create((theme) => ({
   scrollView: {
     padding: theme.gap(2),
     gap: theme.gap(2),
     alignItems: "stretch",
     justifyContent: "flex-start",
-    marginTop: rt.insets.top,
     flexGrow: 1,
-    paddingHorizontal: theme.gap(2),
-  },
-  textInput: {
-    color: theme.colors.typography,
-    fontFamily: theme.fonts.base,
-    fontSize: theme.typography.body,
-    borderColor: theme.colors.tint,
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: theme.gap(2),
-    backgroundColor: "transparent",
   },
 }));
