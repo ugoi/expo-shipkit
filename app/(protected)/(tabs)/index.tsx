@@ -30,9 +30,9 @@ const styles = StyleSheet.create((theme, rt) => ({
     flex: 1,
   },
   scrollView: {
-    marginTop: rt.insets.top,
-    flexGrow: 1,
+    marginTop: rt.insets.top + theme.gap(2),
     paddingHorizontal: theme.gap(2),
+    flexGrow: 1,
     gap: theme.gap(2),
   },
 }));

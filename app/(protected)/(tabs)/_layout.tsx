@@ -25,6 +25,20 @@ export default function TabsLayout() {
           drawable="home"
         />
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="playlist">
+        <Label>Playlist</Label>
+        <Icon
+          sf={{ default: "music.note.list", selected: "music.note.list" }}
+          drawable="playlist"
+        />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="player">
+        <Label>Player</Label>
+        <Icon
+          sf={{ default: "play.circle", selected: "play.circle.fill" }}
+          drawable="player"
+        />
+      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="settings">
         <Label>Settings</Label>
         <Icon
