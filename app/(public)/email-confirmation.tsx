@@ -4,7 +4,7 @@ import { TextInput, Alert } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
-import { ThemedButton } from "@/components/ui/themed-button";
+import { ThemedButton } from "@/components/themed-button";
 import { ThemedText } from "@/components/themed-text";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
@@ -43,7 +43,7 @@ export default function Page() {
       console.error(JSON.stringify(err, null, 2));
       Alert.alert(
         "Verification Failed",
-        "Verification failed — please check your code and try again",
+        "Verification failed — please check your code and try again"
       );
     }
   };

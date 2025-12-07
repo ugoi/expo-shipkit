@@ -2,7 +2,7 @@ import { Alert } from "react-native";
 
 import { useSupabase } from "@/hooks/useSupabase";
 
-import { ThemedButton } from "@/components/ui/themed-button";
+import { ThemedButton } from "@/components/themed-button";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -40,7 +40,7 @@ export default function Page() {
       // Consider showing a toast/alert to the user
       Alert.alert(
         "Sign Out Failed",
-        "An error occurred while signing out. Please try again.",
+        "An error occurred while signing out. Please try again."
       );
     }
   };

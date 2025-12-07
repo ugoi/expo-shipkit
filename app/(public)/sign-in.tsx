@@ -4,7 +4,7 @@ import { TextInput } from "react-native";
 import { useRouter } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
-import { ThemedButton } from "@/components/ui/themed-button";
+import { ThemedButton } from "@/components/themed-button";
 import { AuthError } from "@supabase/supabase-js";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import { ThemedView } from "@/components/themed-view";

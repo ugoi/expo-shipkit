@@ -1,5 +1,5 @@
 import { useSupabase } from "@/hooks/useSupabase";
-import { ThemedButton } from "@/components/ui/themed-button";
+import { ThemedButton } from "@/components/themed-button";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
