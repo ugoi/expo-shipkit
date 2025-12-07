@@ -81,7 +81,6 @@ export default function Page() {
 const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
-    backgroundColor: "yellow",
   },
   scrollView: {
     marginTop: rt.insets.top,

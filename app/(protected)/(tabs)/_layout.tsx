@@ -1,21 +1,12 @@
 import { NativeTabs, Icon, Label } from "expo-router/unstable-native-tabs";
-// import { useEffect } from "react";
-// import { Appearance } from "react-native";
 import { useUnistyles } from "react-native-unistyles";
 
 export default function TabsLayout() {
   const { theme } = useUnistyles();
 
-  // // Override the system color scheme to match the app's theme
-  // // This makes native components (like NativeTabs) follow the app's theme
-  // useEffect(() => {
-  //   const themeName = UnistylesRuntime.themeName;
-  //   Appearance.setColorScheme(themeName === "dark" ? "dark" : "light");
-  // }, [theme]);
-
   return (
     <NativeTabs
-      backgroundColor="blue"
+      backgroundColor={theme.colors.background}
       indicatorColor={theme.colors.foreground}
       badgeTextColor={theme.colors.typography}
       iconColor={{

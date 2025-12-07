@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { Stack } from "expo-router";
+import { Stack, type ErrorBoundaryProps } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 
 import { useSupabase } from "@/hooks/useSupabase";
 import { SupabaseProvider } from "@/providers/supabase-provider";
 import { SuperwallProvider } from "@/providers/superwall-provider";
+import { ThemedView } from "@/components/themed-view";
+import { ThemedText } from "@/components/themed-text";
 
 SplashScreen.setOptions({
   duration: 500,
@@ -13,6 +15,16 @@ SplashScreen.setOptions({
 });
 
 SplashScreen.preventAutoHideAsync();
+
+export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
+  return (
+    <ThemedView style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 20 }}>
+      <ThemedText type="title" style={{ marginBottom: 16 }}>Something went wrong</ThemedText>
+      <ThemedText style={{ marginBottom: 16, textAlign: "center" }}>{error.message}</ThemedText>
+      <ThemedText type="link" onPress={retry}>Try Again</ThemedText>
+    </ThemedView>
+  );
+}
 
 export default function RootLayout() {
   return (

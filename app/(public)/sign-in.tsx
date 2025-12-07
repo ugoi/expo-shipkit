@@ -98,5 +98,3 @@ const styles = StyleSheet.create((theme, rt) => ({
     backgroundColor: "transparent",
   },
 }));
-
-console.log(styles);
