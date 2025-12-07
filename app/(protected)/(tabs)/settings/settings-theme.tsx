@@ -1,7 +1,7 @@
 import { SettingOptionRadio } from "@/components/setting-option-radio";
 import { ThemeColor } from "@/components/theme-color";
+import { ThemedScrollView } from "@/components/themed-scroll-view";
 import { ThemedView } from "@/components/themed-view";
-import { ScrollView } from "react-native";
 import {
   StyleSheet,
   useUnistyles,
@@ -12,7 +12,7 @@ export default function SettingsThemeScreen() {
   const { rt } = useUnistyles();
   return (
     <ThemedView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ThemedScrollView contentContainerStyle={styles.scrollView}>
         <SettingOptionRadio
           label="System"
           isSelected={rt.hasAdaptiveThemes}
@@ -45,7 +45,7 @@ export default function SettingsThemeScreen() {
             />
           </ThemedView>
         )}
-      </ScrollView>
+      </ThemedScrollView>
     </ThemedView>
   );
 }

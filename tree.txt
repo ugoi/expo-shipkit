@@ -1,42 +1,73 @@
 .
 ├── app
-│   ├── _layout.tsx
-│   ├── (protected)
-│   │   ├── _layout.tsx
-│   │   └── (tabs)
-│   │       ├── _layout.tsx
-│   │       ├── index.tsx
-│   │       └── settings.tsx
-│   └── (public)
-│       ├── _layout.tsx
-│       ├── email-confirmation.tsx
-│       ├── sign-in.tsx
-│       └── welcome.tsx
+│   ├── _layout.tsx
+│   ├── +not-found.tsx
+│   ├── (protected)
+│   │   ├── _layout.tsx
+│   │   └── (tabs)
+│   │       ├── _layout.tsx
+│   │       ├── index.tsx
+│   │       ├── player
+│   │       │   ├── _layout.tsx
+│   │       │   ├── index.tsx
+│   │       │   └── [songId].tsx
+│   │       ├── playlist
+│   │       │   ├── _layout.tsx
+│   │       │   └── index.tsx
+│   │       └── settings
+│   │           ├── _layout.tsx
+│   │           ├── index.tsx
+│   │           ├── settings-accent.tsx
+│   │           └── settings-theme.tsx
+│   └── (public)
+│       ├── _layout.tsx
+│       ├── email-confirmation.tsx
+│       ├── sign-in.tsx
+│       └── welcome.tsx
 ├── app.json
 ├── assets
-│   ├── adaptive-icon.png
-│   ├── icon.png
-│   └── splash-icon.png
+│   ├── adaptive-icon.png
+│   ├── icon.png
+│   └── splash-icon.png
 ├── babel.config.js
+├── breakpoints.ts
 ├── bun.lock
-├── constants
-│   └── theme.ts
+├── components
+│   ├── animated-button.tsx
+│   ├── player-controls.tsx
+│   ├── playlist-tile.tsx
+│   ├── setting-option-radio.tsx
+│   ├── setting-tile.tsx
+│   ├── theme-color.tsx
+│   ├── themed-button.tsx
+│   ├── themed-safe-area-view.tsx
+│   ├── themed-scroll-view.tsx
+│   ├── themed-text.tsx
+│   ├── themed-view.tsx
+│   └── ui
+│       ├── icon-symbol.ios.tsx
+│       └── icon-symbol.tsx
 ├── context
-│   └── supabase-context.ts
+│   └── supabase-context.ts
 ├── eslint.config.js
 ├── hooks
-│   ├── useColorScheme.ts
-│   ├── useColorScheme.web.ts
-│   ├── useSignInWithOtp.ts
-│   ├── useSupabase.ts
-│   └── useThemeColor.ts
+│   ├── useSignInWithOtp.ts
+│   └── useSupabase.ts
+├── lib
+│   └── mmkv.ts
 ├── LICENSE
+├── mocks
+│   ├── index.ts
+│   └── playlist.ts
 ├── package.json
 ├── providers
-│   ├── supabase-provider.tsx
-│   └── superwall-provider.tsx
+│   ├── supabase-provider.tsx
+│   └── superwall-provider.tsx
 ├── readme.md
+├── theme.ts
 ├── tree.txt
-└── tsconfig.json
-
-10 directories, 30 files
+├── tsconfig.json
+├── types
+│   ├── index.ts
+│   └── song.ts
+└── unistyles.ts

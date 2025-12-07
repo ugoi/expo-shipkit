@@ -7,5 +7,5 @@
 - [x] Theme the tab bar.
 - [ ] Fix TextInput border color on Android (it shows a gray)
 - [ ] Fix weird keyboard behavior in email-confirmation screen on iPad (IOS 26)
-- [ ] Add Unistyles 3
+- [x] Add Unistyles 3
 - [ ] Add onboarding

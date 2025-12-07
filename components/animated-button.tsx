@@ -7,9 +7,9 @@ import { StyleSheet, UnistylesVariants } from "react-native-unistyles";
 import { useAnimatedVariantColor } from "react-native-unistyles/reanimated";
 import { ThemedText } from "./themed-text";
 
-export type AccentName = UnistylesVariants<typeof style>["accent"];
+export type AccentName = UnistylesVariants<typeof styles>["accent"];
 
-interface ButtonProps extends UnistylesVariants<typeof style> {
+interface ButtonProps extends UnistylesVariants<typeof styles> {
   label: string;
   onPress(): void;
 }
@@ -19,11 +19,11 @@ export const AnimatedButton: React.FunctionComponent<ButtonProps> = ({
   accent,
   onPress,
 }) => {
-  style.useVariants({
+  styles.useVariants({
     accent: accent,
   });
 
-  const color = useAnimatedVariantColor(style.buttonColor, "backgroundColor");
+  const color = useAnimatedVariantColor(styles.buttonColor, "backgroundColor");
   const animatedStyle = useAnimatedStyle(() => ({
     backgroundColor: withTiming(color.value, {
       duration: 500,
@@ -32,14 +32,14 @@ export const AnimatedButton: React.FunctionComponent<ButtonProps> = ({
 
   return (
     <Pressable onPress={onPress}>
-      <Animated.View style={[style.button, animatedStyle]}>
+      <Animated.View style={[styles.button, animatedStyle]}>
         <ThemedText bold>{label}</ThemedText>
       </Animated.View>
     </Pressable>
   );
 };
 
-const style = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create((theme) => ({
   button: {
     width: "100%",
     padding: theme.gap(2),

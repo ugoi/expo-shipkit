@@ -3,7 +3,8 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { playlist } from "@/mocks";
 import { useLocalSearchParams, Redirect } from "expo-router";
-import { Image, ScrollView } from "react-native";
+import { Image } from "expo-image";
+import { ScrollView } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 export default function PlayerScreen() {

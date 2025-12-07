@@ -4,15 +4,10 @@ import { StyleSheet, withUnistyles } from "react-native-unistyles";
 // Wrap ScrollView with withUnistyles for automatic contentContainerStyle mapping
 const UniScrollView = withUnistyles(ScrollView);
 
-export type ThemedScrollViewProps = ScrollViewProps & {
-  lightColor?: string;
-  darkColor?: string;
-};
+export type ThemedScrollViewProps = ScrollViewProps & {};
 
 export function ThemedScrollView({
   style,
-  lightColor,
-  darkColor,
   contentContainerStyle,
   ...otherProps
 }: ThemedScrollViewProps) {

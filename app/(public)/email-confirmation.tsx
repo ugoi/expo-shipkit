@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { TextInput, Alert } from "react-native";
+import { Alert } from "react-native";
 
 import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { ThemedButton } from "@/components/themed-button";
 import { ThemedText } from "@/components/themed-text";
-import { StyleSheet, withUnistyles } from "react-native-unistyles";
+import { StyleSheet } from "react-native-unistyles";
 import { ThemedScrollView } from "@/components/themed-scroll-view";
 import { ThemedView } from "@/components/themed-view";
-
-// Wrap TextInput with withUnistyles and map placeholderTextColor to theme
-const UniTextInput = withUnistyles(TextInput, (theme) => ({
-  placeholderTextColor: theme.colors.dimmed,
-}));
+import { UniTextInput } from "@/components/uni-text-input";
 
 export default function Page() {
   const router = useRouter();
