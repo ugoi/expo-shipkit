@@ -40,7 +40,7 @@ export default function Page() {
       // Consider showing a toast/alert to the user
       Alert.alert(
         "Sign Out Failed",
-        "An error occurred while signing out. Please try again."
+        "An error occurred while signing out. Please try again.",
       );
     }
   };
