@@ -18,13 +18,6 @@ export default function TabsLayout() {
         selected: { color: theme.colors.activeTint },
       }}
     >
-      <NativeTabs.Trigger name="index">
-        <Label>Home</Label>
-        <Icon
-          sf={{ default: "house", selected: "house.fill" }}
-          drawable="home"
-        />
-      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="playlist">
         <Label>Playlist</Label>
         <Icon

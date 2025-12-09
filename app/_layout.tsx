@@ -24,22 +24,10 @@ export default function RootLayout() {
       <SuperwallProvider>
         <SupabaseProvider>
           <RootNavigator />
-          <BlurredStatusBar />
         </SupabaseProvider>
       </SuperwallProvider>
       <StatusBar style="auto" />
     </React.Fragment>
-  );
-}
-
-function BlurredStatusBar() {
-  const { theme, rt } = useUnistyles();
-
-  return (
-    <BlurView
-      intensity={25}
-      style={[styles.statusBarBlur, { height: rt.insets.top }]}
-    />
   );
 }
 

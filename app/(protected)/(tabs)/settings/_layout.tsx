@@ -8,22 +8,20 @@ export default function SettingsLayout() {
   return (
     <Stack
       screenOptions={{
-        headerTitleStyle: {
-          color: theme.colors.typography,
-        },
-        headerStyle: {
-          backgroundColor: theme.colors.background,
-        },
+        headerTransparent: true,
+        headerBlurEffect: "regular",
+        headerTitleStyle: { color: theme.colors.typography, fontSize: 20 },
         contentStyle: {
           backgroundColor: theme.colors.background,
         },
+        headerShadowVisible: false,
+        headerTintColor: theme.colors.tint,
       }}
     >
       <Stack.Screen
         name="index"
         options={{
           title: "Settings",
-          headerShown: false,
         }}
       />
       <Stack.Screen

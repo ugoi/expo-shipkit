@@ -48,7 +48,6 @@ export default function Page() {
   return (
     <ThemedView style={styles.container}>
       <ThemedScrollView contentContainerStyle={styles.scrollView}>
-        <ThemedText type="title">Settings</ThemedText>
         {/* Use native UI switches per-platform to avoid HostView errors. */}
         {/* {renderNotificationsToggle()} */}
         <ThemedView style={styles.settingsContainer}>
@@ -83,12 +82,11 @@ const styles = StyleSheet.create((theme, rt) => ({
     flex: 1,
   },
   scrollView: {
-    marginTop: rt.insets.top + theme.gap(2),
+    marginTop: rt.insets.top + rt.statusBar.height,
     paddingHorizontal: theme.gap(2),
     flexGrow: 1,
   },
   settingsContainer: {
-    marginTop: theme.gap(4),
     gap: theme.gap(4),
   },
   settingRow: {

@@ -1,19 +1,13 @@
 import { SongTile } from "@/components/playlist-tile";
-import { ThemedScrollView } from "@/components/themed-scroll-view";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
 import { playlist } from "@/mocks";
 import { router } from "expo-router";
-import { View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 export default function Page() {
   return (
-    <ThemedView style={styles.container}>
-      <ThemedScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.header}>
-          <ThemedText type="title">Playlist</ThemedText>
-        </View>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
         {playlist.map((song) => (
           <SongTile
             song={song}
@@ -23,23 +17,18 @@ export default function Page() {
             key={song.id}
           />
         ))}
-      </ThemedScrollView>
-    </ThemedView>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create((theme, rt) => ({
   container: {
-    marginTop: rt.insets.top + theme.gap(2),
     flex: 1,
   },
   scrollView: {
     gap: theme.gap(3),
     paddingHorizontal: theme.gap(2),
-    paddingBottom: rt.insets.bottom + theme.gap(10),
-    flexGrow: 1,
-  },
-  header: {
-    paddingBottom: theme.gap(2),
+    paddingBottom: theme.gap(10),
   },
 }));

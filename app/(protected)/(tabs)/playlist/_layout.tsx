@@ -8,14 +8,16 @@ export default function PlaylistLayout() {
   return (
     <Stack
       screenOptions={{
-        headerTitleStyle: {
-          color: theme.colors.typography,
-        },
-        headerStyle: {
-          backgroundColor: theme.colors.background,
-        },
+        headerTransparent: true,
+        headerBlurEffect: "regular",
+        headerTitleStyle: { color: theme.colors.typography, fontSize: 20 },
         contentStyle: {
           backgroundColor: theme.colors.background,
+        },
+        headerShadowVisible: false,
+        headerTintColor: theme.colors.tint,
+        headerSearchBarOptions: {
+          placeholder: "Search in playlist",
         },
       }}
     >
@@ -23,7 +25,6 @@ export default function PlaylistLayout() {
         name="index"
         options={{
           title: "Playlist",
-          headerShown: false,
         }}
       />
     </Stack>
