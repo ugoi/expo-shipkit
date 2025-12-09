@@ -1,19 +1,19 @@
 import { ThemedText } from "@/components/themed-text";
 import { ThemedButton } from "@/components/themed-button";
-import { ThemedView } from "@/components/themed-view";
 import { router } from "expo-router";
 import { StyleSheet } from "react-native-unistyles";
+import { View } from "react-native";
 
 export default function PlayerIndexScreen() {
   return (
-    <ThemedView style={styles.container}>
+    <View style={styles.container}>
       <ThemedText type="title">Looking for inspiration?</ThemedText>
       <ThemedText>Pick a song from the playlist</ThemedText>
       <ThemedButton
         title="Pick a song"
         onPress={() => router.replace("/(protected)/(tabs)/playlist")}
       />
-    </ThemedView>
+    </View>
   );
 }
 

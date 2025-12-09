@@ -1,4 +1,4 @@
-import { Alert } from "react-native";
+import { Alert, ScrollView } from "react-native";
 
 import { useSupabase } from "@/hooks/useSupabase";
 
@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, UnistylesRuntime } from "react-native-unistyles";
 import { SettingTile } from "@/components/setting-tile";
 import { router } from "expo-router";
+import { View } from "react-native";
 
 export default function Page() {
   const systemTheme = UnistylesRuntime.hasAdaptiveThemes;
@@ -46,11 +47,11 @@ export default function Page() {
   };
 
   return (
-    <ThemedView style={styles.container}>
-      <ThemedScrollView contentContainerStyle={styles.scrollView}>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
         {/* Use native UI switches per-platform to avoid HostView errors. */}
         {/* {renderNotificationsToggle()} */}
-        <ThemedView style={styles.settingsContainer}>
+        <View style={styles.settingsContainer}>
           <SettingTile
             settingName="Theme"
             selectedValue="Light"
@@ -71,9 +72,9 @@ export default function Page() {
           <ThemedText style={styles.subscriptionText}>
             {isPaidUser ? "You are a paid user" : "You are on the free plan"}
           </ThemedText>
-        </ThemedView>
-      </ThemedScrollView>
-    </ThemedView>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -82,9 +83,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     flex: 1,
   },
   scrollView: {
-    marginTop: rt.insets.top + rt.statusBar.height,
     paddingHorizontal: theme.gap(2),
-    flexGrow: 1,
   },
   settingsContainer: {
     gap: theme.gap(4),
