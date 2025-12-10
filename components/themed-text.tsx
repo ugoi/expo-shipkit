@@ -45,7 +45,7 @@ const styles = StyleSheet.create((theme) => ({
       },
       dimmed: {
         true: {
-          color: theme.colors.tint,
+          color: theme.colors.dimmed,
         },
       },
     },

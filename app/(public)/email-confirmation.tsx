@@ -9,7 +9,7 @@ import { ThemedText } from "@/components/themed-text";
 import { StyleSheet } from "react-native-unistyles";
 import { ThemedTextInput } from "@/components/themed-text-input";
 
-export default function Page() {
+export default function EmailConfirmationScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{ email?: string | string[] }>();
   const email = typeof params.email === "string" ? params.email : undefined;
@@ -37,7 +37,7 @@ export default function Page() {
       console.error(JSON.stringify(err, null, 2));
       Alert.alert(
         "Verification Failed",
-        "Verification failed — please check your code and try again",
+        "Verification failed — please check your code and try again"
       );
     }
   };

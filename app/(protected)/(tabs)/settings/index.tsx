@@ -8,7 +8,7 @@ import { StyleSheet, UnistylesRuntime } from "react-native-unistyles";
 import { SettingTile } from "@/components/setting-tile";
 import { router } from "expo-router";
 
-export default function Page() {
+export default function SettingsScreen() {
   const systemTheme = UnistylesRuntime.hasAdaptiveThemes;
   const { signOut } = useSupabase();
 
@@ -37,7 +37,7 @@ export default function Page() {
       // Consider showing a toast/alert to the user
       Alert.alert(
         "Sign Out Failed",
-        "An error occurred while signing out. Please try again.",
+        "An error occurred while signing out. Please try again."
       );
     }
   };
@@ -84,11 +84,6 @@ const styles = StyleSheet.create((theme, rt) => ({
   },
   settingsContainer: {
     gap: theme.gap(4),
-  },
-  settingRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
   },
   subscriptionText: {
     textAlign: "center",

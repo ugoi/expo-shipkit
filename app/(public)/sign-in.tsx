@@ -9,7 +9,7 @@ import { StyleSheet } from "react-native-unistyles";
 import { ScrollView, View } from "react-native";
 import { ThemedTextInput } from "@/components/themed-text-input";
 
-export default function Page() {
+export default function SignInScreen() {
   const router = useRouter();
   const { signInWithOtp, isLoaded } = useSignInWithOtp();
 
@@ -46,7 +46,7 @@ export default function Page() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <ScrollView
         alwaysBounceVertical={false}
         contentContainerStyle={styles.scrollView}
@@ -71,6 +71,9 @@ export default function Page() {
 }
 
 const styles = StyleSheet.create((theme) => ({
+  container: {
+    flex: 1,
+  },
   scrollView: {
     padding: theme.gap(2),
     gap: theme.gap(2),

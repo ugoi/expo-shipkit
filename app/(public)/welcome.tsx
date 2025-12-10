@@ -13,7 +13,7 @@ const UniIonicons = withUnistyles(Ionicons, (theme) => ({
   size: theme.sizes.icon.l,
 }));
 
-export default function Page() {
+export default function WelcomeScreen() {
   const router = useRouter();
   const { registerPlacement } = usePlacement({
     onError: (err) => console.error("Placement Error:", err),

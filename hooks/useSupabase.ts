@@ -13,11 +13,15 @@ interface UseSupabaseProps {
 
 export const useSupabase = (): UseSupabaseProps => {
   const supabase = useContext(SupabaseContext);
+
+  if (!supabase) {
+    throw new Error("useSupabase must be used within a SupabaseProvider");
+  }
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    if (!supabase) return;
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setIsLoaded(true);
@@ -25,7 +29,7 @@ export const useSupabase = (): UseSupabaseProps => {
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, newSession) => {
         setSession(newSession);
-      },
+      }
     );
     return () => {
       listener.subscription.unsubscribe();
@@ -33,14 +37,9 @@ export const useSupabase = (): UseSupabaseProps => {
   }, [supabase]);
 
   const signOut = async () => {
-    if (!supabase) return;
     await supabase.auth.signOut();
     setSession(null);
   };
-
-  if (!supabase) {
-    throw new Error("useSupabase must be used within a SupabaseProvider");
-  }
 
   return { isLoaded, session, supabase, signOut };
 };

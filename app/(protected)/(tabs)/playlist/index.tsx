@@ -1,15 +1,15 @@
-import { SongTile } from "@/components/playlist-tile";
+import { PlaylistTile } from "@/components/playlist-tile";
 import { playlist } from "@/mocks";
 import { router } from "expo-router";
 import { ScrollView, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
-export default function Page() {
+export default function PlaylistScreen() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         {playlist.map((song) => (
-          <SongTile
+          <PlaylistTile
             song={song}
             onPress={() => {
               router.push(`/(protected)/(tabs)/player/${song.id}`);
