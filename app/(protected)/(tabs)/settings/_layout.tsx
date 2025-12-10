@@ -8,14 +8,13 @@ export default function SettingsLayout() {
   return (
     <Stack
       screenOptions={{
-        headerTransparent: true,
-        headerBlurEffect: "regular",
         headerTitleStyle: { color: theme.colors.typography, fontSize: 20 },
         contentStyle: {
           backgroundColor: theme.colors.background,
         },
         headerShadowVisible: false,
         headerTintColor: theme.colors.tint,
+        headerStyle: { backgroundColor: theme.colors.background },
       }}
     >
       <Stack.Screen
@@ -29,7 +28,6 @@ export default function SettingsLayout() {
         options={{
           title: "Change theme",
           presentation: "modal",
-          headerShown: true,
         }}
       />
       <Stack.Screen
@@ -37,7 +35,6 @@ export default function SettingsLayout() {
         options={{
           title: "Change accent",
           presentation: "modal",
-          headerShown: true,
         }}
       />
     </Stack>

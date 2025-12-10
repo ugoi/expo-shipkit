@@ -1,7 +1,6 @@
 import { SettingOptionRadio } from "@/components/setting-option-radio";
 import { ThemeColor } from "@/components/theme-color";
-import { ThemedScrollView } from "@/components/themed-scroll-view";
-import { ThemedView } from "@/components/themed-view";
+import { ScrollView, View } from "react-native";
 import {
   StyleSheet,
   useUnistyles,
@@ -11,8 +10,8 @@ import {
 export default function SettingsThemeScreen() {
   const { rt } = useUnistyles();
   return (
-    <ThemedView style={styles.container}>
-      <ThemedScrollView contentContainerStyle={styles.scrollView}>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
         <SettingOptionRadio
           label="System"
           isSelected={rt.hasAdaptiveThemes}
@@ -30,7 +29,7 @@ export default function SettingsThemeScreen() {
           }}
         />
         {!rt.hasAdaptiveThemes && (
-          <ThemedView style={styles.row}>
+          <View style={styles.row}>
             <ThemeColor
               label="light"
               onPress={() => {
@@ -43,19 +42,21 @@ export default function SettingsThemeScreen() {
                 UnistylesRuntime.setTheme("dark");
               }}
             />
-          </ThemedView>
+          </View>
         )}
-      </ThemedScrollView>
-    </ThemedView>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.background,
+    paddingBottom: rt.insets.bottom,
   },
-  scrollView: {
-    flex: 1,
+  contentContainer: {
+    flexGrow: 1,
     gap: theme.gap(2),
     paddingTop: theme.gap(2),
     paddingHorizontal: theme.gap(2),

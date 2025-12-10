@@ -9,7 +9,8 @@ export default function PlaylistLayout() {
     <Stack
       screenOptions={{
         headerTransparent: true,
-        headerBlurEffect: "regular",
+        headerLargeTitle: true,
+        headerBlurEffect: "none",
         headerTitleStyle: { color: theme.colors.typography, fontSize: 20 },
         contentStyle: {
           backgroundColor: theme.colors.background,

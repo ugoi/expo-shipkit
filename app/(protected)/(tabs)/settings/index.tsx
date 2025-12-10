@@ -1,11 +1,7 @@
 import { Alert, ScrollView } from "react-native";
-
 import { useSupabase } from "@/hooks/useSupabase";
-
 import { ThemedButton } from "@/components/themed-button";
-import { ThemedScrollView } from "@/components/themed-scroll-view";
 import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
 import { useUser } from "expo-superwall";
 import { useEffect, useState } from "react";
 import { StyleSheet, UnistylesRuntime } from "react-native-unistyles";
@@ -19,6 +15,7 @@ export default function Page() {
 
   const { subscriptionStatus } = useUser();
   const [isPaidUser, setIsPaidUser] = useState(false);
+
   useEffect(() => {
     if (subscriptionStatus?.status === "ACTIVE") {
       if (__DEV__) {
@@ -48,9 +45,7 @@ export default function Page() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        {/* Use native UI switches per-platform to avoid HostView errors. */}
-        {/* {renderNotificationsToggle()} */}
+      <ScrollView contentContainerStyle={[styles.contentContainer]}>
         <View style={styles.settingsContainer}>
           <SettingTile
             settingName="Theme"
@@ -81,8 +76,10 @@ export default function Page() {
 const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.background,
   },
-  scrollView: {
+  contentContainer: {
+    flexGrow: 1,
     paddingHorizontal: theme.gap(2),
   },
   settingsContainer: {

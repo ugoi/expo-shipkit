@@ -1,10 +1,8 @@
 import { AccentName, AnimatedButton } from "@/components/animated-button";
-import { ThemedScrollView } from "@/components/themed-scroll-view";
 import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Pressable, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 export default function SettingsAccentScreen() {
@@ -13,9 +11,9 @@ export default function SettingsAccentScreen() {
   const [selectedAccent, setSelectedAccent] = useState<AccentName>("banana");
 
   return (
-    <ThemedView style={styles.container}>
-      <ThemedScrollView contentContainerStyle={styles.scrollView}>
-        <ThemedView style={styles.row}>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <View style={styles.row}>
           {Object.entries(allAccents).map(([accentName, accentColor]) => (
             <Pressable
               key={accentName}
@@ -30,9 +28,9 @@ export default function SettingsAccentScreen() {
               <ThemedText bold>{accentName}</ThemedText>
             </Pressable>
           ))}
-        </ThemedView>
-      </ThemedScrollView>
-      <ThemedView style={styles.buttonContainer}>
+        </View>
+      </ScrollView>
+      <View style={styles.buttonContainer}>
         <AnimatedButton
           label="Save"
           accent={selectedAccent}
@@ -40,18 +38,19 @@ export default function SettingsAccentScreen() {
             router.back();
           }}
         />
-      </ThemedView>
-    </ThemedView>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.background,
     paddingBottom: rt.insets.bottom,
   },
-  scrollView: {
-    flex: 1,
+  contentContainer: {
+    flexGrow: 1,
     gap: theme.gap(2),
     paddingTop: theme.gap(2),
     paddingHorizontal: theme.gap(2),
