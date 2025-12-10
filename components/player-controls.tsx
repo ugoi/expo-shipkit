@@ -1,6 +1,5 @@
 import { Pressable, View } from "react-native";
-import { StyleSheet } from "react-native-unistyles";
-import { useUnistyles } from "react-native-unistyles";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 import { IconSymbol } from "./ui/icon-symbol";
 
 export const PlayerControls = () => {

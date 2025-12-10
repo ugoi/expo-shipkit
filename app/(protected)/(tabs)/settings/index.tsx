@@ -1,4 +1,4 @@
-import { Alert, ScrollView } from "react-native";
+import { Alert, ScrollView, View } from "react-native";
 import { useSupabase } from "@/hooks/useSupabase";
 import { ThemedButton } from "@/components/themed-button";
 import { ThemedText } from "@/components/themed-text";
@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { StyleSheet, UnistylesRuntime } from "react-native-unistyles";
 import { SettingTile } from "@/components/setting-tile";
 import { router } from "expo-router";
-import { View } from "react-native";
 
 export default function Page() {
   const systemTheme = UnistylesRuntime.hasAdaptiveThemes;
@@ -38,7 +37,7 @@ export default function Page() {
       // Consider showing a toast/alert to the user
       Alert.alert(
         "Sign Out Failed",
-        "An error occurred while signing out. Please try again."
+        "An error occurred while signing out. Please try again.",
       );
     }
   };

@@ -1,7 +1,7 @@
 import { SongTile } from "@/components/playlist-tile";
 import { playlist } from "@/mocks";
 import { router } from "expo-router";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 export default function Page() {

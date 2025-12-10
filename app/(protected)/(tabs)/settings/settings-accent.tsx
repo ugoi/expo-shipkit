@@ -2,7 +2,7 @@ import { AccentName, AnimatedButton } from "@/components/animated-button";
 import { ThemedText } from "@/components/themed-text";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 export default function SettingsAccentScreen() {

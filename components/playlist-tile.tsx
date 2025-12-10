@@ -24,9 +24,7 @@ export const SongTile: React.FunctionComponent<SongProps> = ({
         placeholder={{ blurhash }}
       />
       <View style={styles.textContainer}>
-        <ThemedText bold>
-          {song.title}
-        </ThemedText>
+        <ThemedText bold>{song.title}</ThemedText>
         <ThemedText dimmed>{song.genre}</ThemedText>
       </View>
       <ThemedText>{song.duration}</ThemedText>

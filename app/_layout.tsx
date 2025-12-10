@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { BlurView } from "expo-blur";
-import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 import { useSupabase } from "@/hooks/useSupabase";
 import { SupabaseProvider } from "@/providers/supabase-provider";
@@ -59,13 +57,3 @@ function RootNavigator() {
     </Stack>
   );
 }
-
-const styles = StyleSheet.create({
-  statusBarBlur: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 100,
-  },
-});

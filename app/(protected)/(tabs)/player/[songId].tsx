@@ -1,6 +1,5 @@
 import { PlayerControls } from "@/components/player-controls";
 import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
 import { playlist } from "@/mocks";
 import { useLocalSearchParams, Redirect } from "expo-router";
 import { Image } from "expo-image";
