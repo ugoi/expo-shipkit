@@ -7,9 +7,8 @@ import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { ThemedButton } from "@/components/themed-button";
 import { ThemedText } from "@/components/themed-text";
 import { StyleSheet } from "react-native-unistyles";
-import { ThemedScrollView } from "@/components/themed-scroll-view";
-import { ThemedView } from "@/components/themed-view";
 import { ThemedTextInput } from "@/components/themed-text-input";
+import { ScrollView, View } from "react-native";
 
 export default function Page() {
   const router = useRouter();
@@ -45,10 +44,11 @@ export default function Page() {
   };
 
   return (
-    <ThemedView style={{ flex: 1 }}>
-      <ThemedScrollView
+    <View style={styles.container}>
+      <ScrollView
         alwaysBounceVertical={false}
         contentContainerStyle={styles.scrollView}
+        keyboardShouldPersistTaps="handled"
       >
         <ThemedText style={styles.dimmedText}>
           Please enter the 4-digit verification code we&apos;ve just sent to{" "}
@@ -66,12 +66,17 @@ export default function Page() {
           onPress={onSignInPress}
           disabled={!token}
         />
-      </ThemedScrollView>
-    </ThemedView>
+      </ScrollView>
+    </View>
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create((theme, rt) => ({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+    paddingBottom: rt.insets.bottom,
+  },
   scrollView: {
     padding: theme.gap(2),
     gap: theme.gap(2),

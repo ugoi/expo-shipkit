@@ -8,18 +8,13 @@ export default function PlaylistLayout() {
   return (
     <Stack
       screenOptions={{
-        headerTransparent: true,
-        headerLargeTitle: true,
-        headerBlurEffect: "none",
         headerTitleStyle: { color: theme.colors.typography, fontSize: 20 },
         contentStyle: {
           backgroundColor: theme.colors.background,
         },
         headerShadowVisible: false,
         headerTintColor: theme.colors.tint,
-        headerSearchBarOptions: {
-          placeholder: "Search in playlist",
-        },
+        headerStyle: { backgroundColor: theme.colors.background },
       }}
     >
       <Stack.Screen

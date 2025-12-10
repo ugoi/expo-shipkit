@@ -4,7 +4,7 @@ import { ThemedView } from "@/components/themed-view";
 import { playlist } from "@/mocks";
 import { useLocalSearchParams, Redirect } from "expo-router";
 import { Image } from "expo-image";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 export default function PlayerScreen() {
@@ -17,7 +17,7 @@ export default function PlayerScreen() {
   }
 
   return (
-    <ThemedView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Image source={{ uri: song.imageUrl }} style={styles.image} />
         <ThemedText type="title">{song.title}</ThemedText>
@@ -27,7 +27,7 @@ export default function PlayerScreen() {
         <ThemedText>{song.duration}</ThemedText>
         <PlayerControls />
       </ScrollView>
-    </ThemedView>
+    </View>
   );
 }
 
@@ -35,6 +35,8 @@ const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
     marginTop: rt.insets.top,
+    backgroundColor: theme.colors.background,
+    paddingBottom: rt.insets.bottom,
   },
   scrollContent: {
     flexGrow: 1,

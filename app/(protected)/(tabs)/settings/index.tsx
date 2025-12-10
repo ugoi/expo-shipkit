@@ -77,6 +77,7 @@ const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
     backgroundColor: theme.colors.background,
+    paddingBottom: rt.insets.bottom,
   },
   contentContainer: {
     flexGrow: 1,

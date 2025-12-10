@@ -5,8 +5,7 @@ import { usePlacement } from "expo-superwall";
 import { ThemedButton } from "@/components/themed-button";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import { ThemedScrollView } from "@/components/themed-scroll-view";
+import { ScrollView, View } from "react-native";
 
 // Wrap TextInput with withUnistyles and map placeholderTextColor to theme
 const UniIonicons = withUnistyles(Ionicons, (theme) => ({
@@ -33,8 +32,8 @@ export default function Page() {
   };
 
   return (
-    <ThemedView style={{ flex: 1 }}>
-      <ThemedScrollView
+    <View style={styles.container}>
+      <ScrollView
         alwaysBounceVertical={false}
         contentContainerStyle={styles.scrollView}
       >
@@ -47,20 +46,24 @@ export default function Page() {
         />
 
         <ThemedButton title="Show Paywall" onPress={handleTriggerPlacement} />
-      </ThemedScrollView>
-    </ThemedView>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create((theme, rt) => ({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+    paddingBottom: rt.insets.bottom,
+  },
   scrollView: {
+    flexGrow: 1,
     marginTop: rt.insets.top,
-    marginBottom: rt.insets.bottom,
     padding: theme.gap(2),
     gap: theme.gap(2),
     alignItems: "stretch",
     justifyContent: "flex-end",
-    flexGrow: 1,
     paddingHorizontal: theme.gap(2),
   },
 }));

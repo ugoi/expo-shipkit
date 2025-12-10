@@ -6,8 +6,7 @@ import { useSignInWithOtp } from "@/hooks/useSignInWithOtp";
 import { ThemedButton } from "@/components/themed-button";
 import { AuthError } from "@supabase/supabase-js";
 import { StyleSheet } from "react-native-unistyles";
-import { ThemedView } from "@/components/themed-view";
-import { ThemedScrollView } from "@/components/themed-scroll-view";
+import { ScrollView, View } from "react-native";
 import { ThemedTextInput } from "@/components/themed-text-input";
 
 export default function Page() {
@@ -47,10 +46,11 @@ export default function Page() {
   };
 
   return (
-    <ThemedView style={{ flex: 1 }}>
-      <ThemedScrollView
+    <View style={{ flex: 1 }}>
+      <ScrollView
         alwaysBounceVertical={false}
         contentContainerStyle={styles.scrollView}
+        keyboardShouldPersistTaps="handled"
       >
         <ThemedTextInput
           autoCapitalize="none"
@@ -65,8 +65,8 @@ export default function Page() {
           onPress={onSignInPress}
           disabled={!email || isLoading}
         />
-      </ThemedScrollView>
-    </ThemedView>
+      </ScrollView>
+    </View>
   );
 }
 

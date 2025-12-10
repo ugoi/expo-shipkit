@@ -25,8 +25,10 @@ export default function Page() {
 const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.background,
   },
   scrollView: {
+    flexGrow: 1,
     gap: theme.gap(3),
     paddingHorizontal: theme.gap(2),
     paddingBottom: theme.gap(10),

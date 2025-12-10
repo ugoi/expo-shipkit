@@ -8,15 +8,13 @@ export default function PlayerLayout() {
   return (
     <Stack
       screenOptions={{
-        headerTitleStyle: {
-          color: theme.colors.typography,
-        },
-        headerStyle: {
-          backgroundColor: theme.colors.background,
-        },
+        headerTitleStyle: { color: theme.colors.typography, fontSize: 20 },
         contentStyle: {
           backgroundColor: theme.colors.background,
         },
+        headerShadowVisible: false,
+        headerTintColor: theme.colors.tint,
+        headerStyle: { backgroundColor: theme.colors.background },
       }}
     >
       <Stack.Screen

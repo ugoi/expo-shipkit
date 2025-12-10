@@ -1,11 +1,11 @@
 import { type ErrorBoundaryProps } from "expo-router";
-import { ThemedView } from "./themed-view";
+import { View } from "react-native";
 import { ThemedText } from "./themed-text";
 import { StyleSheet } from "react-native-unistyles";
 
 export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
   return (
-    <ThemedView style={styles.container}>
+    <View style={styles.container}>
       <ThemedText type="title" style={styles.title}>
         Something went wrong
       </ThemedText>
@@ -13,7 +13,7 @@ export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
       <ThemedText type="link" onPress={retry}>
         Try Again
       </ThemedText>
-    </ThemedView>
+    </View>
   );
 }
 
@@ -23,6 +23,7 @@ const styles = StyleSheet.create((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     padding: theme.gap(2.5),
+    backgroundColor: theme.colors.background,
   },
   title: {
     marginBottom: theme.gap(2),
