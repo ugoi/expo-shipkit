@@ -40,8 +40,16 @@ const styles = StyleSheet.create((theme) => ({
     opacity: state.pressed ? 0.75 : 1,
   }),
   image: {
-    width: 80,
-    height: 80,
+    width: {
+      xs: 80,
+      md: 120,
+      lg: 200,
+    },
+    height: {
+      xs: 80,
+      md: 120,
+      lg: 200,
+    },
     borderRadius: theme.gap(2),
   },
   textContainer: {

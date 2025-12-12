@@ -32,5 +32,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     opacity: state.pressed ? 0.75 : 1,
+    _web: {
+      _hover: {
+        opacity: 0.75,
+      },
+      _active: {
+        opacity: 0.5,
+      },
+    },
   }),
 });

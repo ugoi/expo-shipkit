@@ -7,27 +7,20 @@ import { useEffect, useState } from "react";
 import { StyleSheet, UnistylesRuntime } from "react-native-unistyles";
 import { SettingTile } from "@/components/setting-tile";
 import { router } from "expo-router";
+import { useStore } from "@/store";
 
 export default function SettingsScreen() {
   const systemTheme = UnistylesRuntime.hasAdaptiveThemes;
+  const { preferredAccent } = useStore();
   const { signOut } = useSupabase();
 
   const { subscriptionStatus } = useUser();
-  const [isPaidUser, setIsPaidUser] = useState(false);
 
-  useEffect(() => {
-    if (subscriptionStatus?.status === "ACTIVE") {
-      if (__DEV__) {
-        console.log("User has active entitlements");
-      }
-      setIsPaidUser(true);
-    } else {
-      if (__DEV__) {
-        console.log("User is on free plan");
-      }
-      setIsPaidUser(false);
-    }
-  }, [subscriptionStatus]);
+  const isPaidUser = subscriptionStatus?.status === "ACTIVE";
+
+  if (__DEV__) {
+    console.log("Subscription Status:", subscriptionStatus);
+  }
 
   const handleSignOut = async () => {
     try {
@@ -56,7 +49,7 @@ export default function SettingsScreen() {
           />
           <SettingTile
             settingName="App accent"
-            selectedValue="Default"
+            selectedValue={preferredAccent ?? "Default"}
             description="Primary app color"
             onPress={() =>
               router.push("/(protected)/(tabs)/settings/settings-accent")

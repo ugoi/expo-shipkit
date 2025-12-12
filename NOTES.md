@@ -1,0 +1,1 @@
+- improve and standardize stylesheet naming like for example for contentContainerStyle.

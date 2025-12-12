@@ -3,6 +3,12 @@ import { StyleSheet } from "react-native-unistyles";
 import { darkTheme, lightTheme } from "./theme";
 import { breakpoints } from "./breakpoints";
 
+export type Accents = keyof (typeof lightTheme)["colors"]["accents"];
+
+export type Themes = (keyof AppThemes & string);
+
+
+
 type AppThemes = {
   light: typeof lightTheme;
   dark: typeof darkTheme;

@@ -22,11 +22,14 @@ const MAPPING = {
   "chevron.left.forwardslash.chevron.right": "code",
   "chevron.right": "chevron-right",
   "arrow.up.right.square": "open-in-new",
-  "backward.end.fill": "skip-previous",
+  "music.house": "queue-music",
+  "play.circle": "play-circle-outline",
+  "gear.circle": "settings",
+  "backward.end.fill": "first-page",
   "backward.fill": "fast-rewind",
-  "play.circle.fill": "play-circle-filled",
   "forward.fill": "fast-forward",
-  "forward.end.fill": "skip-next",
+  "forward.end.fill": "last-page",
+  "play.circle.fill": "play-circle-filled",
 } as IconMapping;
 
 /**

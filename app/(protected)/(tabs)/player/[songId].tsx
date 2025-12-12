@@ -4,7 +4,7 @@ import { playlist } from "@/mocks";
 import { useLocalSearchParams, Redirect } from "expo-router";
 import { Image } from "expo-image";
 import { ScrollView, View } from "react-native";
-import { StyleSheet } from "react-native-unistyles";
+import { mq, StyleSheet } from "react-native-unistyles";
 
 export default function PlayerScreen() {
   const { songId } = useLocalSearchParams();
@@ -41,6 +41,9 @@ const styles = StyleSheet.create((theme, rt) => ({
     flexGrow: 1,
     gap: theme.gap(2),
     alignItems: "center",
+    justifyContent: {
+      [mq.only.width(600)]: "center",
+    },
     paddingTop: theme.gap(3),
   },
   image: {

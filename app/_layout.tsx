@@ -6,6 +6,9 @@ import { StatusBar } from "expo-status-bar";
 import { useSupabase } from "@/hooks/useSupabase";
 import { SupabaseProvider } from "@/providers/supabase-provider";
 import { SuperwallProvider } from "@/providers/superwall-provider";
+import { useStore } from "@/store";
+import { UnistylesRuntime } from "react-native-unistyles";
+import { Appearance } from "react-native";
 
 export { ErrorBoundary } from "@/components/error-boundary";
 
@@ -30,6 +33,22 @@ export default function RootLayout() {
 }
 
 function RootNavigator() {
+  const { preferredTheme, adaptiveThemes } = useStore();
+
+  UnistylesRuntime.setAdaptiveThemes(adaptiveThemes);
+
+  if (!adaptiveThemes) {
+    UnistylesRuntime.setTheme(preferredTheme);
+  }
+
+  const theme = UnistylesRuntime.getTheme();
+
+  UnistylesRuntime.setRootViewBackgroundColor(theme.colors.background);
+
+  useEffect(() => {
+    Appearance.setColorScheme(preferredTheme === "dark" ? "dark" : "light");
+  }, [preferredTheme]);
+
   const { isLoaded, session } = useSupabase();
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import Animated, {
 import { StyleSheet, UnistylesVariants } from "react-native-unistyles";
 import { useAnimatedVariantColor } from "react-native-unistyles/reanimated";
 import { ThemedText } from "./themed-text";
+import { useStore } from "@/store";
 
 export type AccentName = UnistylesVariants<typeof styles>["accent"];
 
@@ -19,8 +20,10 @@ export const AnimatedButton: React.FunctionComponent<ButtonProps> = ({
   accent,
   onPress,
 }) => {
+  const { preferredAccent } = useStore();
+
   styles.useVariants({
-    accent: accent,
+    accent: accent ?? preferredAccent,
   });
 
   const color = useAnimatedVariantColor(styles.buttonColor, "backgroundColor");

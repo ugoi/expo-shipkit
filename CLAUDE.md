@@ -163,3 +163,4 @@ When working on this project:
 2. **Understand before implementing**: Read the relevant docs section before writing code
 
 3. **Follow existing patterns**: Look at existing components and screens for patterns to follow
+- always check the internet and mcps and do research before proceeding

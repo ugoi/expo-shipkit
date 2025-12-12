@@ -6,9 +6,15 @@ import {
   useUnistyles,
   UnistylesRuntime,
 } from "react-native-unistyles";
+import { useStore } from "@/store";
 
 export default function SettingsThemeScreen() {
   const { rt } = useUnistyles();
+  const {
+    setPreferredTheme,
+    setAdaptiveThemes,
+  } = useStore();
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -18,6 +24,7 @@ export default function SettingsThemeScreen() {
           onPress={() => {
             if (rt.hasAdaptiveThemes) return;
             UnistylesRuntime.setAdaptiveThemes(true);
+            setAdaptiveThemes(true);
           }}
         />
         <SettingOptionRadio
@@ -26,6 +33,7 @@ export default function SettingsThemeScreen() {
           onPress={() => {
             if (!rt.hasAdaptiveThemes) return;
             UnistylesRuntime.setAdaptiveThemes(false);
+            setAdaptiveThemes(false);
           }}
         />
         {!rt.hasAdaptiveThemes && (
@@ -34,12 +42,14 @@ export default function SettingsThemeScreen() {
               label="light"
               onPress={() => {
                 UnistylesRuntime.setTheme("light");
+                setPreferredTheme("light");
               }}
             />
             <ThemeColor
               label="dark"
               onPress={() => {
                 UnistylesRuntime.setTheme("dark");
+                setPreferredTheme("dark");
               }}
             />
           </View>
