@@ -15,7 +15,7 @@ interface ButtonProps extends UnistylesVariants<typeof styles> {
   onPress(): void;
 }
 
-export const AnimatedButton: React.FunctionComponent<ButtonProps> = ({
+export const AccentButton: React.FunctionComponent<ButtonProps> = ({
   label,
   accent,
   onPress,

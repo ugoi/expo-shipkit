@@ -41,11 +41,11 @@ export default function WelcomeScreen() {
           Welcome to the App! <UniIonicons name="rocket" />
         </ThemedText>
         <ThemedButton
-          title="Continue with email"
+          label="Continue with email"
           onPress={() => router.navigate("/sign-in")}
         />
 
-        <ThemedButton title="Show Paywall" onPress={handleTriggerPlacement} />
+        <ThemedButton label="Show Paywall" onPress={handleTriggerPlacement} />
       </ScrollView>
     </View>
   );

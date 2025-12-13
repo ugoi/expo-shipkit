@@ -1,4 +1,4 @@
-import { AnimatedButton } from "@/components/animated-button";
+import { AccentButton } from "@/components/accent-button";
 import { ThemedText } from "@/components/themed-text";
 import { useStore } from "@/store";
 import { router } from "expo-router";
@@ -33,7 +33,7 @@ export default function SettingsAccentScreen() {
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <AnimatedButton
+        <AccentButton
           label="Save"
           accent={selectedAccent}
           onPress={() => {

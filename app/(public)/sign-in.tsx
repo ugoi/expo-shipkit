@@ -61,7 +61,7 @@ export default function SignInScreen() {
           placeholder="Email"
         />
         <ThemedButton
-          title={isLoading ? "Sending..." : "Continue"}
+          label={isLoading ? "Sending..." : "Continue"}
           onPress={onSignInPress}
           disabled={!email || isLoading}
         />

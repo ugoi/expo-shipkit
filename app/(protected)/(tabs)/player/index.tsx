@@ -10,7 +10,7 @@ export default function PlayerIndexScreen() {
       <ThemedText type="title">Looking for inspiration?</ThemedText>
       <ThemedText>Pick a song from the playlist</ThemedText>
       <ThemedButton
-        title="Pick a song"
+        label="Pick a song"
         onPress={() => router.replace("/(protected)/(tabs)/playlist")}
       />
     </View>

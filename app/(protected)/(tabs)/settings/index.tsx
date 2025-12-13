@@ -54,7 +54,7 @@ export default function SettingsScreen() {
               router.push("/(protected)/(tabs)/settings/settings-accent")
             }
           />
-          <ThemedButton title="Sign Out" onPress={handleSignOut} />
+          <ThemedButton label="Sign Out" onPress={handleSignOut} />
           <ThemedText style={styles.subscriptionText}>
             {isPaidUser ? "You are a paid user" : "You are on the free plan"}
           </ThemedText>

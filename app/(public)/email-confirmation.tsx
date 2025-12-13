@@ -61,7 +61,7 @@ export default function EmailConfirmationScreen() {
           keyboardType="number-pad"
         />
         <ThemedButton
-          title="Continue"
+          label="Continue"
           onPress={onSignInPress}
           disabled={!token}
         />
