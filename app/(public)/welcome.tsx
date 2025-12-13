@@ -35,7 +35,7 @@ export default function WelcomeScreen() {
     <View style={styles.container}>
       <ScrollView
         alwaysBounceVertical={false}
-        contentContainerStyle={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
       >
         <ThemedText type="title">
           Welcome to the App! <UniIonicons name="rocket" />
@@ -57,7 +57,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     backgroundColor: theme.colors.background,
     paddingBottom: rt.insets.bottom,
   },
-  scrollView: {
+  contentContainer: {
     flexGrow: 1,
     marginTop: rt.insets.top,
     padding: theme.gap(2),

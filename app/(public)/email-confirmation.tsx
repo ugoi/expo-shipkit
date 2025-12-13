@@ -46,7 +46,7 @@ export default function EmailConfirmationScreen() {
     <View style={styles.container}>
       <ScrollView
         alwaysBounceVertical={false}
-        contentContainerStyle={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
         keyboardShouldPersistTaps="handled"
       >
         <ThemedText style={styles.dimmedText}>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     backgroundColor: theme.colors.background,
     paddingBottom: rt.insets.bottom,
   },
-  scrollView: {
+  contentContainer: {
     padding: theme.gap(2),
     gap: theme.gap(2),
     alignItems: "stretch",

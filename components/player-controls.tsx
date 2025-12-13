@@ -9,7 +9,7 @@ export const PlayerControls = () => {
   const accent = theme.colors.accents[preferredAccent];
 
   return (
-    <View style={styles.actions}>
+    <View style={styles.container}>
       <Pressable>
         <IconSymbol name="backward.end.fill" size={40} color={accent} />
       </Pressable>
@@ -30,7 +30,7 @@ export const PlayerControls = () => {
 };
 
 const styles = StyleSheet.create((theme) => ({
-  actions: {
+  container: {
     marginTop: theme.gap(2),
     flexDirection: "row",
     gap: theme.gap(2),

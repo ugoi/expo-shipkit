@@ -17,7 +17,7 @@ export default function PlayerScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
         <Image source={{ uri: song.imageUrl }} style={styles.image} />
         <ThemedText type="title">{song.title}</ThemedText>
         <ThemedText dimmed type="subtitle">
@@ -37,7 +37,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     backgroundColor: theme.colors.background,
     paddingBottom: rt.insets.bottom,
   },
-  scrollContent: {
+  contentContainer: {
     flexGrow: 1,
     gap: theme.gap(2),
     alignItems: "center",

@@ -9,7 +9,6 @@ export function ThemedButton({
 }: {
   title: string;
   onPress: () => void;
-  color?: string;
   disabled?: boolean;
   style?: object;
 }) {
@@ -23,7 +22,7 @@ export function ThemedButton({
       style={[styles.button, style]}
       onPress={onPress}
     >
-      <Text style={[styles.buttonText]}>{title}</Text>
+      <Text style={styles.label}>{title}</Text>
     </Pressable>
   );
 }
@@ -42,7 +41,7 @@ const styles = StyleSheet.create((theme) => ({
       },
     },
   },
-  buttonText: {
+  label: {
     color: theme.colors.background,
     fontFamily: theme.fonts.base,
     fontWeight: "600",

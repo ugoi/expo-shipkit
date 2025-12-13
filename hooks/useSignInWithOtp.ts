@@ -5,7 +5,7 @@ export const useSignInWithOtp = () => {
 
   async function signInWithOtp({ email }: { email: string }) {
     const { error } = await supabase.auth.signInWithOtp({
-      email: email,
+      email,
     });
 
     if (error) throw error;
