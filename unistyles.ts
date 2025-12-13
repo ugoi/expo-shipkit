@@ -5,7 +5,7 @@ import { breakpoints } from "./breakpoints";
 
 export type Accents = keyof (typeof lightTheme)["colors"]["accents"];
 
-export type Themes = keyof AppThemes & string;
+export type Themes = keyof AppThemes;
 
 type AppThemes = {
   light: typeof lightTheme;

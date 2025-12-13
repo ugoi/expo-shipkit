@@ -1,3 +1,4 @@
+import React from "react";
 import { Pressable } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -8,17 +9,21 @@ import { useAnimatedVariantColor } from "react-native-unistyles/reanimated";
 import { ThemedText } from "./themed-text";
 import { useStore } from "@/store";
 
+const ANIMATION_DURATION_MS = 500;
+
 export type AccentName = UnistylesVariants<typeof styles>["accent"];
 
 interface ButtonProps extends UnistylesVariants<typeof styles> {
   label: string;
-  onPress(): void;
+  onPress: () => void;
+  testID?: string;
 }
 
 export const AccentButton: React.FunctionComponent<ButtonProps> = ({
   label,
   accent,
   onPress,
+  testID,
 }) => {
   const { preferredAccent } = useStore();
 
@@ -29,12 +34,17 @@ export const AccentButton: React.FunctionComponent<ButtonProps> = ({
   const color = useAnimatedVariantColor(styles.buttonColor, "backgroundColor");
   const animatedStyle = useAnimatedStyle(() => ({
     backgroundColor: withTiming(color.value, {
-      duration: 500,
+      duration: ANIMATION_DURATION_MS,
     }),
   }));
 
   return (
-    <Pressable onPress={onPress}>
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      testID={testID}
+    >
       <Animated.View style={[styles.button, animatedStyle]}>
         <ThemedText bold>{label}</ThemedText>
       </Animated.View>

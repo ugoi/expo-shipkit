@@ -1,11 +1,13 @@
-import { Pressable, Text, ViewStyle } from "react-native";
+import React from "react";
+import { Pressable, StyleProp, Text, ViewStyle } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 interface ThemedButtonProps {
   label: string;
-  onPress(): void;
+  onPress: () => void;
   disabled?: boolean;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
+  testID?: string;
 }
 
 export const ThemedButton: React.FunctionComponent<ThemedButtonProps> = ({
@@ -13,6 +15,7 @@ export const ThemedButton: React.FunctionComponent<ThemedButtonProps> = ({
   onPress,
   disabled,
   style,
+  testID,
 }) => {
   styles.useVariants({
     disabled: !!disabled,
@@ -24,6 +27,7 @@ export const ThemedButton: React.FunctionComponent<ThemedButtonProps> = ({
       accessibilityState={{ disabled }}
       style={[styles.button, style]}
       onPress={onPress}
+      testID={testID}
     >
       <Text style={styles.label}>{label}</Text>
     </Pressable>

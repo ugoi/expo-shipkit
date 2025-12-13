@@ -6,7 +6,7 @@
 - [x] Make status bar work with dark mode.
 - [x] Theme the tab bar.
 - [x] Add Unistyles 3
-- [ ] improve and standardize stylesheet naming like for example for contentContainerStyle.
+- [x] improve and standardize stylesheet naming like for example for contentContainerStyle.
 - [ ] Fix TextInput border color on Android (it shows a gray)
 - [ ] Fix weird keyboard behavior in email-confirmation screen on iPad (IOS 26)
 - [ ] Add onboarding

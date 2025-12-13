@@ -1,3 +1,4 @@
+import React from "react";
 import { type ErrorBoundaryProps } from "expo-router";
 import { View } from "react-native";
 import { ThemedText } from "./themed-text";
