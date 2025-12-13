@@ -7,10 +7,10 @@ const UniTextInput = withUnistyles(TextInput, (theme) => ({
 
 export type ThemedTextInputProps = TextInputProps;
 
-export function ThemedTextInput({
+export const ThemedTextInput: React.FunctionComponent<ThemedTextInputProps> = ({
   style,
   ...otherProps
-}: ThemedTextInputProps) {
+}) => {
   return (
     <UniTextInput
       style={[styles.textInput, style]}
@@ -18,7 +18,7 @@ export function ThemedTextInput({
       {...otherProps}
     />
   );
-}
+};
 
 const styles = StyleSheet.create((theme) => ({
   textInput: {

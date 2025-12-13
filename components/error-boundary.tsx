@@ -3,7 +3,10 @@ import { View } from "react-native";
 import { ThemedText } from "./themed-text";
 import { StyleSheet } from "react-native-unistyles";
 
-export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
+export const ErrorBoundary: React.FunctionComponent<ErrorBoundaryProps> = ({
+  error,
+  retry,
+}) => {
   return (
     <View style={styles.container}>
       <ThemedText type="title" style={styles.title}>
@@ -15,7 +18,7 @@ export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
       </ThemedText>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create((theme) => ({
   container: {

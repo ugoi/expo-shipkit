@@ -3,16 +3,16 @@ import { StyleSheet, type UnistylesVariants } from "react-native-unistyles";
 
 export type ThemedTextProps = TextProps & UnistylesVariants<typeof styles>;
 
-export function ThemedText({
+export const ThemedText: React.FunctionComponent<ThemedTextProps> = ({
   style,
   type,
   bold,
   dimmed,
   ...rest
-}: ThemedTextProps) {
+}) => {
   styles.useVariants({ type, bold, dimmed });
   return <Text style={[styles.text, style]} {...rest} />;
-}
+};
 
 const styles = StyleSheet.create((theme) => ({
   text: {

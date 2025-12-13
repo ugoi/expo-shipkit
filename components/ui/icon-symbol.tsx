@@ -32,23 +32,26 @@ const MAPPING = {
   "play.circle.fill": "play-circle-filled",
 } as IconMapping;
 
-/**
- * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.
- * This ensures a consistent look across platforms, and optimal resource usage.
- * Icon `name`s are based on SF Symbols and require manual mapping to Material Icons.
- */
-export function IconSymbol({
-  name,
-  size = 24,
-  color,
-  style,
-}: {
+interface IconSymbolProps {
   name: IconSymbolName;
   size?: number;
   color: string | OpaqueColorValue;
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
-}) {
+}
+
+/**
+ * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.
+ * This ensures a consistent look across platforms, and optimal resource usage.
+ * Icon `name`s are based on SF Symbols and require manual mapping to Material Icons.
+ */
+export const IconSymbol: React.FunctionComponent<IconSymbolProps> = ({
+  name,
+  size = 24,
+  color,
+  style,
+  // weight is accepted for API compatibility with iOS but not used on Android/web
+}) => {
   return (
     <MaterialIcons
       color={color}
@@ -57,4 +60,4 @@ export function IconSymbol({
       style={style}
     />
   );
-}
+};

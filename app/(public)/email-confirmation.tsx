@@ -57,7 +57,7 @@ export default function EmailConfirmationScreen() {
           autoCapitalize="none"
           value={token}
           placeholder="Enter verification code"
-          onChangeText={(token) => setToken(token)}
+          onChangeText={setToken}
           keyboardType="number-pad"
         />
         <ThemedButton
