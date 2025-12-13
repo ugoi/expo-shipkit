@@ -49,7 +49,7 @@ export default function SignInScreen() {
     <View style={styles.container}>
       <ScrollView
         alwaysBounceVertical={false}
-        contentContainerStyle={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
         keyboardShouldPersistTaps="handled"
       >
         <ThemedTextInput
@@ -74,7 +74,7 @@ const styles = StyleSheet.create((theme) => ({
   container: {
     flex: 1,
   },
-  scrollView: {
+  contentContainer: {
     padding: theme.gap(2),
     gap: theme.gap(2),
     alignItems: "stretch",

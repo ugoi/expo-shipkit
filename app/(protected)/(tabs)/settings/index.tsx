@@ -3,14 +3,13 @@ import { useSupabase } from "@/hooks/useSupabase";
 import { ThemedButton } from "@/components/themed-button";
 import { ThemedText } from "@/components/themed-text";
 import { useUser } from "expo-superwall";
-import { useEffect, useState } from "react";
 import { StyleSheet, UnistylesRuntime } from "react-native-unistyles";
 import { SettingTile } from "@/components/setting-tile";
 import { router } from "expo-router";
 import { useStore } from "@/store";
 
 export default function SettingsScreen() {
-  const systemTheme = UnistylesRuntime.hasAdaptiveThemes;
+  const hasAdaptiveThemes = UnistylesRuntime.hasAdaptiveThemes;
   const { preferredAccent } = useStore();
   const { signOut } = useSupabase();
 
@@ -37,12 +36,12 @@ export default function SettingsScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={[styles.contentContainer]}>
-        <View style={styles.settingsContainer}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <View style={styles.content}>
           <SettingTile
             settingName="Theme"
             selectedValue="Light"
-            description={systemTheme ? "System" : "User"}
+            description={hasAdaptiveThemes ? "System" : "User"}
             onPress={() =>
               router.push("/(protected)/(tabs)/settings/settings-theme")
             }
@@ -75,7 +74,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     flexGrow: 1,
     paddingHorizontal: theme.gap(2),
   },
-  settingsContainer: {
+  content: {
     gap: theme.gap(4),
   },
   subscriptionText: {

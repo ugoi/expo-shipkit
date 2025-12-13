@@ -7,7 +7,7 @@ import { StyleSheet } from "react-native-unistyles";
 export default function PlaylistScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
         {playlist.map((song) => (
           <PlaylistTile
             song={song}
@@ -27,7 +27,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     flex: 1,
     backgroundColor: theme.colors.background,
   },
-  scrollView: {
+  contentContainer: {
     flexGrow: 1,
     gap: theme.gap(3),
     paddingHorizontal: theme.gap(2),
