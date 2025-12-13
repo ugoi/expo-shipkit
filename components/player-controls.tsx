@@ -9,20 +9,23 @@ export const PlayerControls = () => {
   const accent = theme.colors.accents[preferredAccent];
 
   return (
-    <View style={styles.container}>
-      <Pressable>
+    <View style={styles.container} accessibilityRole="toolbar">
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="Go to beginning"
+      >
         <IconSymbol name="backward.end.fill" size={40} color={accent} />
       </Pressable>
-      <Pressable>
+      <Pressable accessibilityRole="button" accessibilityLabel="Rewind">
         <IconSymbol name="backward.fill" size={50} color={accent} />
       </Pressable>
-      <Pressable>
+      <Pressable accessibilityRole="button" accessibilityLabel="Play">
         <IconSymbol name="play.circle.fill" size={100} color={accent} />
       </Pressable>
-      <Pressable>
+      <Pressable accessibilityRole="button" accessibilityLabel="Fast forward">
         <IconSymbol name="forward.fill" size={50} color={accent} />
       </Pressable>
-      <Pressable>
+      <Pressable accessibilityRole="button" accessibilityLabel="Go to end">
         <IconSymbol name="forward.end.fill" size={40} color={accent} />
       </Pressable>
     </View>

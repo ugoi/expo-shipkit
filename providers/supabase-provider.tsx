@@ -11,8 +11,17 @@ interface SupabaseProviderProps {
 }
 
 export const SupabaseProvider = ({ children }: SupabaseProviderProps) => {
-  const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!;
-  const supabaseKey = process.env.EXPO_PUBLIC_SUPABASE_KEY!;
+  const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.EXPO_PUBLIC_SUPABASE_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    const missingKeys = [];
+    if (!supabaseUrl) missingKeys.push("EXPO_PUBLIC_SUPABASE_URL");
+    if (!supabaseKey) missingKeys.push("EXPO_PUBLIC_SUPABASE_KEY");
+    throw new Error(
+      `Missing Supabase configuration: ${missingKeys.join(", ")}`,
+    );
+  }
 
   const supabase = useMemo(
     () =>

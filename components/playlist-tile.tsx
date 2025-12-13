@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet } from "react-native-unistyles";
 import { Image } from "expo-image";
 import { Pressable, PressableStateCallbackType, View } from "react-native";
@@ -17,7 +18,12 @@ export const PlaylistTile: React.FunctionComponent<SongProps> = ({
   onPress,
 }) => {
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable
+      style={styles.container}
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${song.title} by ${song.genre}, ${song.duration}`}
+    >
       <Image
         source={song.imageUrl}
         style={styles.image}

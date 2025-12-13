@@ -1,3 +1,4 @@
+import React from "react";
 import { Pressable, PressableStateCallbackType, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 import { ThemedText } from "./themed-text";
@@ -16,7 +17,12 @@ export const SettingTile: React.FunctionComponent<SettingTileProps> = ({
   onPress,
 }) => {
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable
+      style={styles.container}
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${settingName}: ${selectedValue}. ${description}`}
+    >
       <View>
         <ThemedText bold>{settingName}</ThemedText>
         <ThemedText dimmed>{description}</ThemedText>

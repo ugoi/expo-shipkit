@@ -1,3 +1,4 @@
+import React from "react";
 import { Pressable } from "react-native";
 import {
   ScopedTheme,
@@ -17,7 +18,12 @@ export const ThemeColor: React.FunctionComponent<ThemeColorProps> = ({
 }) => {
   return (
     <ScopedTheme name={label}>
-      <Pressable style={styles.container} onPress={onPress}>
+      <Pressable
+        style={styles.container}
+        onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={`Select ${label} theme`}
+      >
         <ThemedText>{label}</ThemedText>
       </Pressable>
     </ScopedTheme>

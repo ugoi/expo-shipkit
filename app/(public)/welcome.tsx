@@ -16,10 +16,15 @@ const UniIonicons = withUnistyles(Ionicons, (theme) => ({
 export default function WelcomeScreen() {
   const router = useRouter();
   const { registerPlacement } = usePlacement({
-    onError: (err) => console.error("Placement Error:", err),
-    onPresent: (info) => console.log("Paywall Presented:", info),
-    onDismiss: (info, result) =>
-      console.log("Paywall Dismissed:", info, "Result:", result),
+    onError: (err) => {
+      if (__DEV__) console.error("Placement Error:", err);
+    },
+    onPresent: (info) => {
+      if (__DEV__) console.log("Paywall Presented:", info);
+    },
+    onDismiss: (info, result) => {
+      if (__DEV__) console.log("Paywall Dismissed:", info, "Result:", result);
+    },
   });
 
   const handleTriggerPlacement = async () => {

@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import { Appearance } from "react-native";
+import { UnistylesRuntime } from "react-native-unistyles";
 
 import { useSupabase } from "@/hooks/useSupabase";
 import { SupabaseProvider } from "@/providers/supabase-provider";
 import { SuperwallProvider } from "@/providers/superwall-provider";
 import { useStore } from "@/store";
-import { UnistylesRuntime } from "react-native-unistyles";
-import { Appearance } from "react-native";
 
 export { ErrorBoundary } from "@/components/error-boundary";
 
@@ -35,19 +35,20 @@ export default function RootLayout() {
 function RootNavigator() {
   const { preferredTheme, adaptiveThemes } = useStore();
 
-  UnistylesRuntime.setAdaptiveThemes(adaptiveThemes);
+  useLayoutEffect(() => {
+    UnistylesRuntime.setAdaptiveThemes(adaptiveThemes);
 
-  if (!adaptiveThemes) {
-    UnistylesRuntime.setTheme(preferredTheme);
-  }
+    if (!adaptiveThemes) {
+      UnistylesRuntime.setTheme(preferredTheme);
+      Appearance.setColorScheme(preferredTheme === "dark" ? "dark" : "light");
+    } else {
+      // Let the system control the color scheme when adaptive themes is enabled
+      Appearance.setColorScheme(null);
+    }
 
-  const theme = UnistylesRuntime.getTheme();
-
-  UnistylesRuntime.setRootViewBackgroundColor(theme.colors.background);
-
-  useEffect(() => {
-    Appearance.setColorScheme(preferredTheme === "dark" ? "dark" : "light");
-  }, [preferredTheme]);
+    const theme = UnistylesRuntime.getTheme();
+    UnistylesRuntime.setRootViewBackgroundColor(theme.colors.background);
+  }, [preferredTheme, adaptiveThemes]);
 
   const { isLoaded, session } = useSupabase();
 

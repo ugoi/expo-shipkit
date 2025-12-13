@@ -1,23 +1,33 @@
+import { useCallback } from "react";
+import { FlatList, View } from "react-native";
+import { router } from "expo-router";
+import { StyleSheet } from "react-native-unistyles";
 import { PlaylistTile } from "@/components/playlist-tile";
 import { playlist } from "@/mocks";
-import { router } from "expo-router";
-import { ScrollView, View } from "react-native";
-import { StyleSheet } from "react-native-unistyles";
+import { Song } from "@/types";
 
 export default function PlaylistScreen() {
+  const handlePress = useCallback((songId: number) => {
+    router.push(`/(protected)/(tabs)/player/${songId}`);
+  }, []);
+
+  const renderItem = useCallback(
+    ({ item }: { item: Song }) => (
+      <PlaylistTile song={item} onPress={() => handlePress(item.id)} />
+    ),
+    [handlePress],
+  );
+
+  const keyExtractor = useCallback((item: Song) => item.id.toString(), []);
+
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        {playlist.map((song) => (
-          <PlaylistTile
-            song={song}
-            onPress={() => {
-              router.push(`/(protected)/(tabs)/player/${song.id}`);
-            }}
-            key={song.id}
-          />
-        ))}
-      </ScrollView>
+      <FlatList
+        data={playlist}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        contentContainerStyle={styles.contentContainer}
+      />
     </View>
   );
 }

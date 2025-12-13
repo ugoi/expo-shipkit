@@ -11,8 +11,6 @@ import { useStore } from "@/store";
 
 const ANIMATION_DURATION_MS = 500;
 
-export type AccentName = UnistylesVariants<typeof styles>["accent"];
-
 interface ButtonProps extends UnistylesVariants<typeof styles> {
   label: string;
   onPress: () => void;

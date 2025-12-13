@@ -1,3 +1,4 @@
+import React from "react";
 import { Pressable, PressableStateCallbackType, View } from "react-native";
 import { StyleSheet, type UnistylesVariants } from "react-native-unistyles";
 import { ThemedText } from "./themed-text";
@@ -15,7 +16,13 @@ export const SettingOptionRadio: React.FunctionComponent<
   });
 
   return (
-    <Pressable onPress={onPress} style={styles.container}>
+    <Pressable
+      onPress={onPress}
+      style={styles.container}
+      accessibilityRole="radio"
+      accessibilityState={{ checked: !!isSelected }}
+      accessibilityLabel={label}
+    >
       <ThemedText type="subtitle">{label}</ThemedText>
       <View style={styles.radio}>
         {isSelected && <View style={styles.radioInner} />}

@@ -13,16 +13,13 @@
     "all": "bun run lint && bun run format && bun run type-check"
   },
   "dependencies": {
-    "@expo/ui": "~0.2.0-beta.9",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@supabase/supabase-js": "^2.87.1",
     "expo": "~54.0.27",
-    "expo-blur": "~15.0.8",
     "expo-build-properties": "~1.0.10",
     "expo-constants": "~18.0.11",
     "expo-dev-client": "~6.0.20",
     "expo-image": "~3.0.11",
-    "expo-linear-gradient": "~15.0.8",
     "expo-linking": "~8.0.10",
     "expo-router": "~6.0.17",
     "expo-splash-screen": "~31.0.12",

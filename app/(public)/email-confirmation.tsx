@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Alert, ScrollView, View } from "react-native";
+import { useState, useCallback } from "react";
+import { ActivityIndicator, Alert, ScrollView, View } from "react-native";
 
 import { useRouter, useLocalSearchParams } from "expo-router";
 
@@ -15,16 +15,12 @@ export default function EmailConfirmationScreen() {
   const email = typeof params.email === "string" ? params.email : undefined;
   const { verifyOtp, isLoaded } = useSignInWithOtp();
   const [token, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  if (!email) {
-    // Handle missing email - redirect back or show error
-    console.error("Email parameter is missing");
-    return <ThemedText>Email parameter is required</ThemedText>;
-  }
+  const onSignInPress = useCallback(async () => {
+    if (!isLoaded || isLoading || !email) return;
 
-  const onSignInPress = async () => {
-    if (!isLoaded) return;
-
+    setIsLoading(true);
     try {
       await verifyOtp({
         email,
@@ -34,13 +30,27 @@ export default function EmailConfirmationScreen() {
         pathname: "/(protected)/(tabs)",
       });
     } catch (err) {
-      console.error(JSON.stringify(err, null, 2));
+      if (__DEV__) {
+        console.error(
+          "OTP verification failed:",
+          err instanceof Error ? err.message : err,
+        );
+      }
       Alert.alert(
         "Verification Failed",
         "Verification failed — please check your code and try again",
       );
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }, [isLoaded, isLoading, verifyOtp, email, token, router]);
+
+  if (!email) {
+    if (__DEV__) {
+      console.error("Email parameter is missing");
+    }
+    return <ThemedText>Email parameter is required</ThemedText>;
+  }
 
   return (
     <View style={styles.container}>
@@ -61,10 +71,11 @@ export default function EmailConfirmationScreen() {
           keyboardType="number-pad"
         />
         <ThemedButton
-          label="Continue"
+          label={isLoading ? "Verifying..." : "Continue"}
           onPress={onSignInPress}
-          disabled={!token}
+          disabled={!token || isLoading}
         />
+        {isLoading && <ActivityIndicator />}
       </ScrollView>
     </View>
   );
