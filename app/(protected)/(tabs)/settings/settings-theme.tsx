@@ -10,10 +10,7 @@ import { useStore } from "@/store";
 
 export default function SettingsThemeScreen() {
   const { rt } = useUnistyles();
-  const {
-    setPreferredTheme,
-    setAdaptiveThemes,
-  } = useStore();
+  const { setPreferredTheme, setAdaptiveThemes } = useStore();
 
   return (
     <View style={styles.container}>

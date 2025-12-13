@@ -29,7 +29,7 @@ export const useSupabase = (): UseSupabaseProps => {
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, newSession) => {
         setSession(newSession);
-      }
+      },
     );
     return () => {
       listener.subscription.unsubscribe();

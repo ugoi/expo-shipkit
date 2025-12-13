@@ -37,7 +37,7 @@ export default function EmailConfirmationScreen() {
       console.error(JSON.stringify(err, null, 2));
       Alert.alert(
         "Verification Failed",
-        "Verification failed — please check your code and try again"
+        "Verification failed — please check your code and try again",
       );
     }
   };
