@@ -58,6 +58,12 @@ function RootNavigator() {
     }
   }, [isLoaded]);
 
+  // Don't render routes until auth state is determined
+  // This prevents the welcome screen from flashing before we know if user is logged in
+  if (!isLoaded) {
+    return null;
+  }
+
   return (
     <Stack
       screenOptions={{
